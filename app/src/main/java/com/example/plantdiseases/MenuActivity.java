@@ -3,8 +3,8 @@ package com.example.plantdiseases;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
 
@@ -17,7 +17,7 @@ public class MenuActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
@@ -25,55 +25,75 @@ public class MenuActivity extends AppCompatActivity {
         textInfo = findViewById(R.id.textInfo);
 
         if (textWelcome == null || textInfo == null) {
-            Log.e("MENU_ACTIVITY", "One or both TextViews not found in layout");
+            Log.e("MENU_ACTIVITY", "Views not found: textWelcome=" + (textWelcome == null ? "null" : "found") +
+                    ", textInfo=" + (textInfo == null ? "null" : "found"));
+            Toast.makeText(this, "Ошибка: UI элементы не найдены", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        textWelcome.setText("Здесь будет информация о растениях и болезнях");
-
-        // Инициализация Firebase
         if (FirebaseApp.getApps(this).isEmpty()) {
             FirebaseApp.initializeApp(this);
         }
         db = FirebaseFirestore.getInstance();
         if (db == null) {
             Log.e("MENU_ACTIVITY", "Firestore initialization failed");
-            textInfo.setText("Ошибка инициализации Firestore");
+            Toast.makeText(this, "Ошибка инициализации Firestore", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Получаем документ
-        db.collection("data").document("Fungal").get()
+        String category = getIntent().getStringExtra("category");
+        if (category == null || category.isEmpty()) {
+            Log.e("MENU_ACTIVITY", "No category provided in Intent");
+            textWelcome.setText("Ошибка");
+            textInfo.setText("Категория не выбрана");
+            Toast.makeText(this, "Категория не выбрана", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        loadCategoryData(category);
+    }
+
+    private void loadCategoryData(String category) {
+        Log.d("MENU_ACTIVITY", "Loading data for category: " + category);
+        textWelcome.setText(category);
+
+        String fieldName = category.equals("Fungal") ? "Lateblight" : "info"; // Уточните поле для Virus
+        Log.d("MENU_ACTIVITY", "Using field name: " + fieldName);
+
+        db.collection("data").document(category).get()
                 .addOnSuccessListener(documentSnapshot -> {
+                    Log.d("FIREBASE", "Document exists: " + documentSnapshot.exists());
                     if (documentSnapshot.exists()) {
-                        Log.d("FIREBASE", "Документ найден: " + documentSnapshot.getData());
-                        String fungalInfo = documentSnapshot.getString("Lateblight");
-                        if (fungalInfo != null && !fungalInfo.isEmpty()) {
-                            String formattedText = StyleTextDP(fungalInfo);
-                            // Используем FROM_HTML_MODE_LEGACY для поддержки <i>, <b>, <br> и т.п.
+                        String info = documentSnapshot.getString(fieldName);
+                        Log.d("FIREBASE", "Text data: " + info);
+                        if (info != null && !info.isEmpty()) {
+                            String formattedText = StyleTextDP(info);
                             textInfo.setText(HtmlCompat.fromHtml(formattedText, HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else {
-                            textInfo.setText("Данные о болезни отсутствуют или поле пустое");
-                            Log.w("FIREBASE", "Поле Lateblight не найдено или пустое");
+                            textInfo.setText("Данные о " + category + " отсутствуют");
+                            Log.w("FIREBASE", "Field " + fieldName + " not found or empty");
+                            Toast.makeText(this, "Данные о " + category + " отсутствуют", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Log.e("FIREBASE", "Документ НЕ найден");
-                        textInfo.setText("Документ не найден");
+                        textInfo.setText("Документ " + category + " не найден");
+                        Log.e("FIREBASE", "Document " + category + " not found");
+                        Toast.makeText(this, "Документ " + category + " не найден", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("FIREBASE", "Ошибка загрузки Firestore: ", e);
-                    textInfo.setText("Ошибка загрузки данных: " + e.getMessage());
+                    Log.e("FIREBASE", "Error: " + e.getMessage(), e);
+                    textInfo.setText("Ошибка: " + e.getMessage());
+                    Toast.makeText(this, "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private String StyleTextDP(String fungalInfo) {
-        String cleanedText = fungalInfo
-                .replaceAll("<b/>", "</b>")   // исправляем возможные битые теги
-                .replaceAll("\n", "<br>");    // переносы строк в HTML
-
-        cleanedText = cleanedText.replaceAll("^[⦁•]\\s*", "&#8226; ");
-
+    private String StyleTextDP(String info) {
+        Log.d("MENU_ACTIVITY", "Formatting text: " + info);
+        String cleanedText = info
+                .replaceAll("<b/>", "</b>")
+                .replaceAll("\n", "<br>")
+                .replaceAll("^[⦁•]\\s*", "&#8226; ");
+        Log.d("MENU_ACTIVITY", "Formatted text result: " + cleanedText);
         return cleanedText;
     }
 }

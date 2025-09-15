@@ -33,6 +33,9 @@
         <activity
             android:name=".AddDiseaseActivity"
             android:exported="false" />
+        <activity
+            android:name=".CategoryListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
