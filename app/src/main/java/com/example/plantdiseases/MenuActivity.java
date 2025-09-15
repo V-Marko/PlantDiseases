@@ -1,7 +1,6 @@
 package com.example.plantdiseases;
 
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -32,7 +31,7 @@ public class MenuActivity extends AppCompatActivity {
 
         textWelcome.setText("Здесь будет информация о растениях и болезнях");
 
-        // Initialize Firebase explicitly to avoid SecurityException
+        // Инициализация Firebase
         if (FirebaseApp.getApps(this).isEmpty()) {
             FirebaseApp.initializeApp(this);
         }
@@ -43,17 +42,19 @@ public class MenuActivity extends AppCompatActivity {
             return;
         }
 
-        db.collection("data").document("Data").get()
+        // Получаем документ
+        db.collection("data").document("Fungal").get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         Log.d("FIREBASE", "Документ найден: " + documentSnapshot.getData());
-                        String fungalInfo = documentSnapshot.getString("Fungal");
+                        String fungalInfo = documentSnapshot.getString("Lateblight");
                         if (fungalInfo != null && !fungalInfo.isEmpty()) {
                             String formattedText = StyleTextDP(fungalInfo);
-                            textInfo.setText(HtmlCompat.fromHtml(formattedText, HtmlCompat.FROM_HTML_MODE_COMPACT));
+                            // Используем FROM_HTML_MODE_LEGACY для поддержки <i>, <b>, <br> и т.п.
+                            textInfo.setText(HtmlCompat.fromHtml(formattedText, HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else {
                             textInfo.setText("Данные о болезни отсутствуют или поле пустое");
-                            Log.w("FIREBASE", "Поле Fungal не найдено или пустое");
+                            Log.w("FIREBASE", "Поле Lateblight не найдено или пустое");
                         }
                     } else {
                         Log.e("FIREBASE", "Документ НЕ найден");
@@ -67,7 +68,9 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private String StyleTextDP(String fungalInfo) {
-        String cleanedText = fungalInfo.replaceAll("<b/>", "</b>").replaceAll("\n", "<br>");
+        String cleanedText = fungalInfo
+                .replaceAll("<b/>", "</b>")   // исправляем возможные битые теги
+                .replaceAll("\n", "<br>");    // переносы строк в HTML
 
         cleanedText = cleanedText.replaceAll("^[⦁•]\\s*", "&#8226; ");
 

@@ -19,14 +19,13 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // Reuse activity_main.xml
+        setContentView(R.layout.activity_main);
 
         nameInput = findViewById(R.id.editTextName);
         passwordInput = findViewById(R.id.editTextPassword);
         registerBtn = findViewById(R.id.buttonRegister);
         loginBtn = findViewById(R.id.buttonLogin);
 
-        // Hide login button
         loginBtn.setVisibility(View.GONE);
 
         db = FirebaseFirestore.getInstance();
