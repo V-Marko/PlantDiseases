@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,29 +54,10 @@ public class CategoryListActivity extends AppCompatActivity {
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         categoryRecyclerView.setAdapter(categoryAdapter);
 
-        loadCategories();
-    }
-
-    private void loadCategories() {
-        Log.d("CATEGORY_LIST", "Loading categories from Firestore collection 'data'");
-        db.collection("data").get()
-                .addOnSuccessListener(querySnapshot -> {
-                    categories.clear();
-                    for (QueryDocumentSnapshot doc : querySnapshot) {
-                        String categoryId = doc.getId();
-                        categories.add(categoryId);
-                        Log.d("CATEGORY_LIST", "Found category: " + categoryId);
-                    }
-                    categoryAdapter.notifyDataSetChanged();
-                    Log.d("CATEGORY_LIST", "Total categories loaded: " + categories.size());
-                    if (categories.isEmpty()) {
-                        Log.w("CATEGORY_LIST", "No categories found in Firestore");
-                        Toast.makeText(this, "Категории отсутствуют", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("FIREBASE", "Error loading categories: " + e.getMessage(), e);
-                    Toast.makeText(this, "Ошибка загрузки категорий: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+        // Add test categories
+        categories.add("Fungal");
+        categories.add("Bacterial");
+        categories.add("Viral");
+        categoryAdapter.notifyDataSetChanged();
     }
 }

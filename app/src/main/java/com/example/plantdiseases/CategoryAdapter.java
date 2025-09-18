@@ -1,8 +1,11 @@
+
 package com.example.plantdiseases;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,30 +14,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+
     private List<String> categories;
-    private OnCategoryClickListener listener;
+    private Context context;
+    private OnCategoryClickListener clickListener;
 
     public interface OnCategoryClickListener {
         void onCategoryClick(String category);
     }
 
-    public CategoryAdapter(List<String> categories, OnCategoryClickListener listener) {
+    public CategoryAdapter(List<String> categories, OnCategoryClickListener clickListener) {
         this.categories = categories;
-        this.listener = listener;
+        this.clickListener = clickListener;
     }
 
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
+        context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.category_item, parent, false);
         return new CategoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         String category = categories.get(position);
-        holder.textView.setText(category);
-        holder.itemView.setOnClickListener(v -> listener.onCategoryClick(category));
+        holder.categoryTextView.setText(category);
+
+        // Pass click to MenuActivity
+        holder.categoryImageButton.setOnClickListener(v -> clickListener.onCategoryClick(category));
     }
 
     @Override
@@ -42,12 +50,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categories.size();
     }
 
-    static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
+        ImageButton categoryImageButton;
+        TextView categoryTextView;
 
-        CategoryViewHolder(View itemView) {
+        public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(android.R.id.text1);
+            categoryImageButton = itemView.findViewById(R.id.categoryImage);
+            categoryTextView = itemView.findViewById(R.id.categoryText);
         }
     }
 }

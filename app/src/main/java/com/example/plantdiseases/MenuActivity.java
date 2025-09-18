@@ -1,12 +1,18 @@
 package com.example.plantdiseases;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -50,50 +56,88 @@ public class MenuActivity extends AppCompatActivity {
             return;
         }
 
-        loadCategoryData(category);
-    }
-
-    private void loadCategoryData(String category) {
-        Log.d("MENU_ACTIVITY", "Loading data for category: " + category);
         textWelcome.setText(category);
+        if (category.equals("Fungal")) {
+            String htmlText = "<h3>Круг хозяев</h3>" +
+                    "<p>Томат, перец, баклажан, картофель и др. паслёновые.</p>" +
+                    "<h3>Симптомы</h3>" +
+                    "<h4>Листья:</h4>" +
+                    "<img src='fungal_late_blight' width='500' height='200' /><br/>" +
+                    "<p>⦁ Ранние признаки: на верхней стороне листьев появляются небольшие, неправильной формы, водянистые пятна от светло-зелёного до тёмно-зелёного цвета.<br/>" +
+                    "⦁ Развитие болезни: пятна быстро увеличиваются, становятся буро-коричневыми или пурпурно-чёрными, вокруг них формируется хлоротичная (желтоватая) зона.<br/>" +
+                    "⦁ Поздняя стадия: на нижней стороне листьев, по краям поражённых участков, появляется белый пушистый налёт — спороношение патогена (Phytophthora infestans).</p>" +
+                    "<h4>Стебли и черешки:</h4>" +
+                    "<img src='fungal_late_blight_2' width='300' height='200' /><br/>" +
+                    "<p>⦁ Формируются продолговатые, тёмно-бурые или чёрные некротические поражения.<br/>" +
+                    "⦁ При высокой влажности возможно спороношение на поверхности поражённых тканей.<br/>" +
+                    "⦁ В местах поражения ткани становятся ломкими, что приводит к полеганию растений.</p>" +
+                    "<h4>Плоды:</h4>" +
+                    "<img src='fungal_fruits' width='300' height='200' /><br/>" +
+                    "<p>⦁ Поражение обычно начинается с верхней части плода.<br/>" +
+                    "⦁ На поверхности формируются бурые твёрдые пятна, иногда с серо-зелёным оттенком.<br/>" +
+                    "⦁ Ткани остаются плотными, но со временем покрываются вторичной инфекцией и загнивают.</p>" +
+                    "<h4>Фитофтороз (общее изображение):</h4>" +
+                    "<img src='fungal_late_blight' width='300' height='200' /><br/>" +
+                    "<p>Общее изображение симптомов фитофтороза на растениях.</p>" +
+                    "<h4>Фитофтороз (дополнительное изображение):</h4>" +
+                    "<img src='fungal_late_blight_2' width='300' height='200' /><br/>" +
+                    "<p>Дополнительное изображение симптомов фитофтороза на растениях.</p>" +
+                    "<h3>Эпидемиология и жизненный цикл</h3>" +
+                    "<p><b>Источники инфекции:</b><br/>" +
+                    "⦁ растительные остатки томата, картофеля и других паслёновых;<br/>" +
+                    "⦁ заражённые семенные клубни (у картофеля);<br/>" +
+                    "⦁ сорняки из семейства паслёновых (например, паслён чёрный);<br/>" +
+                    "⦁ соседние посадки заражённых культур.</p>" +
+                    "<p><b>Развитие и распространение:</b><br/>" +
+                    "⦁ Первичное заражение происходит при контакте спор с влажными листьями или стеблями.<br/>" +
+                    "⦁ При высокой влажности на поражённых тканях формируется спороношение. Споры распространяются ветром, дождевыми каплями, насекомыми и механически (через людей, инвентарь, животных).<br/>" +
+                    "⦁ Инфекция распространяется очень быстро: новые очаги могут появляться в течение 2–3 дней после первичного заражения.</p>" +
+                    "<p><b>Климатические условия, способствующие развитию:</b><br/>" +
+                    "⦁ Оптимальная температура: 10–25 °C (с наиболее активным развитием при 15–20 °C).<br/>" +
+                    "⦁ Влажность воздуха выше 75–80% или длительное удержание влаги на листьях (роса, туманы, дожди).<br/>" +
+                    "⦁ Резкие перепады дневной и ночной температуры.<br/>" +
+                    "⦁ Дождевое орошение и загущенные посадки, препятствующие вентиляции.</p>" +
+                    "<p><b>Особенности эпидемиологии:</b><br/>" +
+                    "⦁ На открытых посевах развивается очагами, но в теплицах может принимать характер эпифитотии.<br/>" +
+                    "⦁ При благоприятных условиях болезнь способна уничтожить урожай томата за 7–10 дней.</p>" +
+                    "<h3>Меры борьбы и профилактика</h3>" +
+                    "<p><b>Агротехнические меры:</b><br/>" +
+                    "⦁ Соблюдение севооборота: возвращение паслёновых культур на прежнее место не ранее чем через 3–4 года.<br/>" +
+                    "⦁ Полное удаление и уничтожение растительных остатков после уборки урожая.<br/>" +
+                    "⦁ Использование здорового посадочного материала (сертифицированные растения и клубни).<br/>" +
+                    "⦁ Обеспечение хорошей вентиляции в теплицах, предотвращение загущённых посадок.<br/>" +
+                    "⦁ Полив преимущественно под корень, исключение дождевого орошения.<br/>" +
+                    "⦁ Поддержание оптимального микроклимата (снижение влажности, улучшение циркуляции воздуха).</p>" +
+                    "<p><b>Биологические методы:</b><br/>" +
+                    "⦁ Использование микробиологических препаратов на основе грибов и бактерий для профилактических обработок (Trichoderma spp., Bacillus subtilis), которые подавляют развитие патогена.</p>" +
+                    "<p><b>Химические методы:</b><br/>" +
+                    "⦁ Контактные фунгициды: медьсодержащие препараты (бордосская смесь, хлорокись меди, гидроксид меди).<br/>" +
+                    "⦁ Системные фунгициды: действующие вещества — металаксил, мандипропамид, цимоксанил, циазофамид и др.<br/>" +
+                    "⦁ Применение препаратов строго по регламенту с учётом периода ожидания и ротации действующих веществ для предотвращения резистентности.</p>" +
+                    "<p><b>Интегрированная защита растений (IPM):</b><br/>" +
+                    "⦁ Сочетание агротехнических, биологических и химических приёмов.<br/>" +
+                    "⦁ Регулярный фитосанитарный мониторинг посевов.<br/>" +
+                    "⦁ Применение прогнозных моделей (учёт температуры, влажности и осадков) для определения сроков обработок.<br/>" +
+                    "⦁ Минимизация применения химических средств за счёт профилактических и биологических методов.</p>";
 
-        String fieldName = category.equals("Fungal") ? "Lateblight" : "info"; // Уточните поле для Virus
-        Log.d("MENU_ACTIVITY", "Using field name: " + fieldName);
-
-        db.collection("data").document(category).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    Log.d("FIREBASE", "Document exists: " + documentSnapshot.exists());
-                    if (documentSnapshot.exists()) {
-                        String info = documentSnapshot.getString(fieldName);
-                        Log.d("FIREBASE", "Text data: " + info);
-                        if (info != null && !info.isEmpty()) {
-                            String formattedText = StyleTextDP(info);
-                            textInfo.setText(HtmlCompat.fromHtml(formattedText, HtmlCompat.FROM_HTML_MODE_LEGACY));
-                        } else {
-                            textInfo.setText("Данные о " + category + " отсутствуют");
-                            Log.w("FIREBASE", "Field " + fieldName + " not found or empty");
-                            Toast.makeText(this, "Данные о " + category + " отсутствуют", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        textInfo.setText("Документ " + category + " не найден");
-                        Log.e("FIREBASE", "Document " + category + " not found");
-                        Toast.makeText(this, "Документ " + category + " не найден", Toast.LENGTH_SHORT).show();
+            textInfo.setText(HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY, new Html.ImageGetter() {
+                @Override
+                public Drawable getDrawable(String source) {
+                    int resId = getResources().getIdentifier(source, "drawable", getPackageName());
+                    if (resId == 0) {
+                        Log.w("MENU_ACTIVITY", "Image resource not found: " + source);
+                        Drawable placeholder = getResources().getDrawable(android.R.drawable.ic_menu_gallery);
+                        placeholder.setBounds(0, 0, 300, 200);
+                        return placeholder;
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("FIREBASE", "Error: " + e.getMessage(), e);
-                    textInfo.setText("Ошибка: " + e.getMessage());
-                    Toast.makeText(this, "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-    }
+                    Drawable drawable = getResources().getDrawable(resId);
+                    drawable.setBounds(0, 0, 300, 200);
+                    return drawable;
+                }
+            }, null));
 
-    private String StyleTextDP(String info) {
-        Log.d("MENU_ACTIVITY", "Formatting text: " + info);
-        String cleanedText = info
-                .replaceAll("<b/>", "</b>")
-                .replaceAll("\n", "<br>")
-                .replaceAll("^[⦁•]\\s*", "&#8226; ");
-        Log.d("MENU_ACTIVITY", "Formatted text result: " + cleanedText);
-        return cleanedText;
+        } else {
+            textInfo.setText("Информация о категории " + category + " пока недоступна.");
+        }
     }
 }
