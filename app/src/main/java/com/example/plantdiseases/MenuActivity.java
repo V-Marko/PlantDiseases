@@ -66,15 +66,15 @@ public class MenuActivity extends AppCompatActivity {
 
         textWelcome.setText(category);
         if (category.equals("Fungal")) {
-            String htmlText = "<h2>Фитофтороз (Late blight)</h2>" +
-                    "<h3>Возбудитель.</h3>" +
+            String htmlText = "<h2><b>Фитофтороз (Late blight)</b></h2>\n" +
+                    "<h3>Возбудитель</h3>" +
                     "<img src='fungal_reino_protista'/><br/>" +
-                    "<p style='font-size: 20px; font-weight: 900; text-align: center;'>Phytophthora infestans (оомицет)</p>" +
+                    "<p style='font-size: 20px; font-weight: 900; text-align: center;'><i>Phytophthora infestans</i> (оомицет)</p>" +
                     "<h3>Круг хозяев</h3>"+
                     "<p>Томат, перец, баклажан, картофель и др. паслёновые.</p><br/>"+
 
                     "<h3>Симптомы</h3>" +
-                    "<h5><i>Листья:</i></h5>" +
+                    "<p><b>Листья:</b></p>" +
                     "<p>⦁ <i>Ранние признаки: на верхней стороне листьев появляются небольшие, неправильной формы, водянистые пятна от светло-зелёного до тёмно-зелёного цвета.</i><br/>" +
                     "⦁ <i>Развитие болезни: пятна быстро увеличиваются, становятся буро-коричневыми или пурпурно-чёрными, вокруг них формируется хлоротичная (желтоватая) зона.</i><br/>" +
                     "⦁ <i>Поздняя стадия: на нижней стороне листьев, по краям поражённых участков, появляется белый пушистый налёт — спороношение патогена (Phytophthora infestans).</i></p>" +
@@ -84,7 +84,7 @@ public class MenuActivity extends AppCompatActivity {
                         "<img src='fungal_phytophthora_infestans_late' width='500' height='200' /><br/>" +
                     "</div>" +
 
-                    "<h3>Стебли и черешки:</h3>" +
+                    "<p><b>Стебли и черешки:</b></p>" +
                     "<p>⦁ <i>Формируются продолговатые, тёмно-бурые или чёрные некротические поражения.</i><br/>" +
                     "⦁ <i>При высокой влажности возможно спороношение на поверхности поражённых тканей.</i><br/>" +
                     "⦁ <i>В местах поражения ткани становятся ломкими, что приводит к полеганию растений.</i></p>" +
@@ -95,56 +95,55 @@ public class MenuActivity extends AppCompatActivity {
                     "</div>" +
 
 
-                    "<h4>Плоды:</h4>" +
-                    "<p>⦁ Поражение обычно начинается с верхней части плода.<br/>" +
+                    "<p><b>Плоды:</b></p>" +
+                    "<p><i>⦁ Поражение обычно начинается с верхней части плода.<br/>" +
                     "⦁ На поверхности формируются бурые твёрдые пятна, иногда с серо-зелёным оттенком.<br/>" +
-                    "⦁ Ткани остаются плотными, но со временем покрываются вторичной инфекцией и загнивают.</p>" +
+                    "⦁ Ткани остаются плотными, но со временем покрываются вторичной инфекцией и загнивают.</i></p>" +
 
                     "<div style = 'display:flex; justify-content: center;'>" +
                         "<img src='fungal_tomato', width='500' height='200' /><br/>" +
                         "<img src='fungal_late_blight_2' width='500' height='200' /><br/>" +
                     "</div>" +
 
-                    "<h4>Фитофтороз (общее изображение):</h4>" +
-                    "<img src='fungal_late_blight' width='300' height='200' /><br/>" +
-                    "<p>Общее изображение симптомов фитофтороза на растениях.</p>" +
-                    "<h4>Фитофтороз (дополнительное изображение):</h4>" +
-                    "<img src='fungal_late_blight_2' width='300' height='200' /><br/>" +
-                    "<p>Дополнительное изображение симптомов фитофтороза на растениях.</p>" +
                     "<h3>Эпидемиология и жизненный цикл</h3>" +
-                    "<p><b>Источники инфекции:</b><br/>" +
+                    "<p><b>Источники инфекции:</b><br/>"+
                     "⦁ растительные остатки томата, картофеля и других паслёновых;<br/>" +
                     "⦁ заражённые семенные клубни (у картофеля);<br/>" +
                     "⦁ сорняки из семейства паслёновых (например, паслён чёрный);<br/>" +
-                    "⦁ соседние посадки заражённых культур.</p>" +
-                    "<p><b>Развитие и распространение:</b><br/>" +
+                    "⦁ соседние посадки заражённых культур.</p><br/>" +
+
+                    "<p><b>Развитие и распространение:</b><br/><br/>" +
                     "⦁ Первичное заражение происходит при контакте спор с влажными листьями или стеблями.<br/>" +
                     "⦁ При высокой влажности на поражённых тканях формируется спороношение. Споры распространяются ветром, дождевыми каплями, насекомыми и механически (через людей, инвентарь, животных).<br/>" +
                     "⦁ Инфекция распространяется очень быстро: новые очаги могут появляться в течение 2–3 дней после первичного заражения.</p>" +
-                    "<p><b>Климатические условия, способствующие развитию:</b><br/>" +
-                    "⦁ Оптимальная температура: 10–25 °C (с наиболее активным развитием при 15–20 °C).<br/>" +
+
+                    "<h4><b>Климатические условия, способствующие развитию:</b></h4>" +
+                    "<p>⦁ Оптимальная температура: 10–25 °C (с наиболее активным развитием при 15–20 °C).<br/>" +
                     "⦁ Влажность воздуха выше 75–80% или длительное удержание влаги на листьях (роса, туманы, дожди).<br/>" +
                     "⦁ Резкие перепады дневной и ночной температуры.<br/>" +
                     "⦁ Дождевое орошение и загущенные посадки, препятствующие вентиляции.</p>" +
-                    "<p><b>Особенности эпидемиологии:</b><br/>" +
-                    "⦁ На открытых посевах развивается очагами, но в теплицах может принимать характер эпифитотии.<br/>" +
+
+                    "<h4>Особенности эпидемиологии:</h4>" +
+                    "<p>⦁ На открытых посевах развивается очагами, но в теплицах может принимать характер эпифитотии.<br/>" +
                     "⦁ При благоприятных условиях болезнь способна уничтожить урожай томата за 7–10 дней.</p>" +
                     "<h3>Меры борьбы и профилактика</h3>" +
-                    "<p><b>Агротехнические меры:</b><br/>" +
-                    "⦁ Соблюдение севооборота: возвращение паслёновых культур на прежнее место не ранее чем через 3–4 года.<br/>" +
+                    "<h5>Агротехнические меры:</h5>" +
+                    "<p>⦁ Соблюдение севооборота: возвращение паслёновых культур на прежнее место не ранее чем через 3–4 года.<br/>" +
                     "⦁ Полное удаление и уничтожение растительных остатков после уборки урожая.<br/>" +
                     "⦁ Использование здорового посадочного материала (сертифицированные растения и клубни).<br/>" +
                     "⦁ Обеспечение хорошей вентиляции в теплицах, предотвращение загущённых посадок.<br/>" +
                     "⦁ Полив преимущественно под корень, исключение дождевого орошения.<br/>" +
                     "⦁ Поддержание оптимального микроклимата (снижение влажности, улучшение циркуляции воздуха).</p>" +
-                    "<p><b>Биологические методы:</b><br/>" +
-                    "⦁ Использование микробиологических препаратов на основе грибов и бактерий для профилактических обработок (Trichoderma spp., Bacillus subtilis), которые подавляют развитие патогена.</p>" +
-                    "<p><b>Химические методы:</b><br/>" +
-                    "⦁ Контактные фунгициды: медьсодержащие препараты (бордосская смесь, хлорокись меди, гидроксид меди).<br/>" +
+
+                    "<h3>Биологические методы:</h3>" +
+                    "<p>⦁ Использование микробиологических препаратов на основе грибов и бактерий для профилактических обработок (Trichoderma spp., Bacillus subtilis), которые подавляют развитие патогена.</p>" +
+                    "<h4>Химические методы:</h4>" +
+                    "<p>⦁ Контактные фунгициды: медьсодержащие препараты (бордосская смесь, хлорокись меди, гидроксид меди).<br/>" +
                     "⦁ Системные фунгициды: действующие вещества — металаксил, мандипропамид, цимоксанил, циазофамид и др.<br/>" +
                     "⦁ Применение препаратов строго по регламенту с учётом периода ожидания и ротации действующих веществ для предотвращения резистентности.</p>" +
-                    "<p><b>Интегрированная защита растений (IPM):</b><br/>" +
-                    "⦁ Сочетание агротехнических, биологических и химических приёмов.<br/>" +
+
+                    "<h4>Интегрированная защита растений:</h4>" +
+                    "<p>⦁ Сочетание агротехнических, биологических и химических приёмов.<br/>" +
                     "⦁ Регулярный фитосанитарный мониторинг посевов.<br/>" +
                     "⦁ Применение прогнозных моделей (учёт температуры, влажности и осадков) для определения сроков обработок.<br/>" +
                     "⦁ Минимизация применения химических средств за счёт профилактических и биологических методов.</p>";
@@ -163,28 +162,59 @@ public class MenuActivity extends AppCompatActivity {
                     Drawable drawable = getResources().getDrawable(resId);
 
                     if (source.equals("fungal_reino_protista")) {
-                        drawable.setBounds((screenWidth - 700) / 2 - 70, 0, (screenWidth + 700) / 2, 400);
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
                     }
                     else if (source.equals("fungal_phytophthora") || source.equals("fungal_phytophthora_infestans_late") || source.equals("fungal_late_blight")) {
-                        drawable.setBounds((screenWidth - 700) / 2 - 70, 0, (screenWidth + 700) / 2, 400);
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
                     }
 //                    int originalHeight = drawable.getIntrinsicHeight();
 //                    drawable.setBounds(
 //                            (screenWidth - 800) / 2,0, (screenWidth + 800) / 2,originalHeight
 //                    );
                     else if (source.equals("fungal_phytophthora_infestans_root") || source.equals("fungal_late_blight_3")) {
-                        drawable.setBounds((screenWidth - 700) / 2 - 70, 0, (screenWidth + 700) / 2, 400);
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+
                     }
                     else if (source.equals("fungal_tomato") || source.equals("fungal_late_blight_2")) {
                         int originalWidth = drawable.getIntrinsicWidth();
                         int originalHeight = drawable.getIntrinsicHeight();
 
-                        int maxWidth = 500;
-
+                        int maxWidth = 1000;
                         int newHeight = (originalHeight * maxWidth) / originalWidth;
 
-                        drawable.setBounds((screenWidth - maxWidth) / 2, 0, (screenWidth + maxWidth) / 2, newHeight);
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
                     }
+
 
                     else if (source.equals("fungal_phytophthora_infestans")) {
                         drawable.setBounds( 700, 0, 700, 700);
