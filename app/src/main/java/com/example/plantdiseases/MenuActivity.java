@@ -3,6 +3,7 @@ package com.example.plantdiseases;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MenuActivity extends AppCompatActivity {
 
+    DisplayMetrics displayMetrics = new DisplayMetrics();
+
+    private int screenWidth, screenHeight;
+
     private TextView textWelcome, textInfo;
     private FirebaseFirestore db;
 
@@ -27,6 +32,9 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
         textWelcome = findViewById(R.id.textWelcome);
         textInfo = findViewById(R.id.textInfo);
 
@@ -58,24 +66,45 @@ public class MenuActivity extends AppCompatActivity {
 
         textWelcome.setText(category);
         if (category.equals("Fungal")) {
-            String htmlText = "<h3>Круг хозяев</h3>" +
-                    "<p>Томат, перец, баклажан, картофель и др. паслёновые.</p>" +
+            String htmlText = "<h2>Фитофтороз (Late blight)</h2>" +
+                    "<h3>Возбудитель.</h3>" +
+                    "<img src='fungal_reino_protista'/><br/>" +
+                    "<p style='font-size: 20px; font-weight: 900; text-align: center;'>Phytophthora infestans (оомицет)</p>" +
+                    "<h3>Круг хозяев</h3>"+
+                    "<p>Томат, перец, баклажан, картофель и др. паслёновые.</p><br/>"+
+
                     "<h3>Симптомы</h3>" +
-                    "<h4>Листья:</h4>" +
-                    "<img src='fungal_late_blight' width='500' height='200' /><br/>" +
-                    "<p>⦁ Ранние признаки: на верхней стороне листьев появляются небольшие, неправильной формы, водянистые пятна от светло-зелёного до тёмно-зелёного цвета.<br/>" +
-                    "⦁ Развитие болезни: пятна быстро увеличиваются, становятся буро-коричневыми или пурпурно-чёрными, вокруг них формируется хлоротичная (желтоватая) зона.<br/>" +
-                    "⦁ Поздняя стадия: на нижней стороне листьев, по краям поражённых участков, появляется белый пушистый налёт — спороношение патогена (Phytophthora infestans).</p>" +
-                    "<h4>Стебли и черешки:</h4>" +
-                    "<img src='fungal_late_blight_2' width='300' height='200' /><br/>" +
-                    "<p>⦁ Формируются продолговатые, тёмно-бурые или чёрные некротические поражения.<br/>" +
-                    "⦁ При высокой влажности возможно спороношение на поверхности поражённых тканей.<br/>" +
-                    "⦁ В местах поражения ткани становятся ломкими, что приводит к полеганию растений.</p>" +
+                    "<h5><i>Листья:</i></h5>" +
+                    "<p>⦁ <i>Ранние признаки: на верхней стороне листьев появляются небольшие, неправильной формы, водянистые пятна от светло-зелёного до тёмно-зелёного цвета.</i><br/>" +
+                    "⦁ <i>Развитие болезни: пятна быстро увеличиваются, становятся буро-коричневыми или пурпурно-чёрными, вокруг них формируется хлоротичная (желтоватая) зона.</i><br/>" +
+                    "⦁ <i>Поздняя стадия: на нижней стороне листьев, по краям поражённых участков, появляется белый пушистый налёт — спороношение патогена (Phytophthora infestans).</i></p>" +
+                    "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_late_blight' width='500' height='200' /><br/>" +
+                        "<img src='fungal_phytophthora' width='500' height='200' /><br/>" +
+                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200' /><br/>" +
+                    "</div>" +
+
+                    "<h3>Стебли и черешки:</h3>" +
+                    "<p>⦁ <i>Формируются продолговатые, тёмно-бурые или чёрные некротические поражения.</i><br/>" +
+                    "⦁ <i>При высокой влажности возможно спороношение на поверхности поражённых тканей.</i><br/>" +
+                    "⦁ <i>В местах поражения ткани становятся ломкими, что приводит к полеганию растений.</i></p>" +
+
+                    "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_phytophthora_infestans_root', width='500' height='200' /><br/>" +
+                        "<img src='fungal_late_blight_3' width='500' height='200' /><br/>" +
+                    "</div>" +
+
+
                     "<h4>Плоды:</h4>" +
-                    "<img src='fungal_fruits' width='300' height='200' /><br/>" +
                     "<p>⦁ Поражение обычно начинается с верхней части плода.<br/>" +
                     "⦁ На поверхности формируются бурые твёрдые пятна, иногда с серо-зелёным оттенком.<br/>" +
                     "⦁ Ткани остаются плотными, но со временем покрываются вторичной инфекцией и загнивают.</p>" +
+
+                    "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_tomato', width='500' height='200' /><br/>" +
+                        "<img src='fungal_late_blight_2' width='500' height='200' /><br/>" +
+                    "</div>" +
+
                     "<h4>Фитофтороз (общее изображение):</h4>" +
                     "<img src='fungal_late_blight' width='300' height='200' /><br/>" +
                     "<p>Общее изображение симптомов фитофтороза на растениях.</p>" +
@@ -130,8 +159,39 @@ public class MenuActivity extends AppCompatActivity {
                         placeholder.setBounds(0, 0, 300, 200);
                         return placeholder;
                     }
+
                     Drawable drawable = getResources().getDrawable(resId);
-                    drawable.setBounds(0, 0, 300, 200);
+
+                    if (source.equals("fungal_reino_protista")) {
+                        drawable.setBounds((screenWidth - 700) / 2 - 70, 0, (screenWidth + 700) / 2, 400);
+                    }
+                    else if (source.equals("fungal_phytophthora") || source.equals("fungal_phytophthora_infestans_late") || source.equals("fungal_late_blight")) {
+                        drawable.setBounds((screenWidth - 700) / 2 - 70, 0, (screenWidth + 700) / 2, 400);
+                    }
+//                    int originalHeight = drawable.getIntrinsicHeight();
+//                    drawable.setBounds(
+//                            (screenWidth - 800) / 2,0, (screenWidth + 800) / 2,originalHeight
+//                    );
+                    else if (source.equals("fungal_phytophthora_infestans_root") || source.equals("fungal_late_blight_3")) {
+                        drawable.setBounds((screenWidth - 700) / 2 - 70, 0, (screenWidth + 700) / 2, 400);
+                    }
+                    else if (source.equals("fungal_tomato") || source.equals("fungal_late_blight_2")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 500;
+
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        drawable.setBounds((screenWidth - maxWidth) / 2, 0, (screenWidth + maxWidth) / 2, newHeight);
+                    }
+
+                    else if (source.equals("fungal_phytophthora_infestans")) {
+                        drawable.setBounds( 700, 0, 700, 700);
+                    } else {
+                        drawable.setBounds(0, 0, 300, 200);
+                    }
+
                     return drawable;
                 }
             }, null));
@@ -139,5 +199,8 @@ public class MenuActivity extends AppCompatActivity {
         } else {
             textInfo.setText("Информация о категории " + category + " пока недоступна.");
         }
+
     }
+
 }
+
