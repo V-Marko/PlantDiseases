@@ -2,16 +2,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:layout_height="220dp"
+    android:background="@drawable/rounded_bg"
+    android:layout_margin="10dp"
+    android:padding="16dp">
 
-    <ImageButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/categoryImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/fungal_late_blight"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
         android:contentDescription="Category image"
         android:scaleType="centerCrop"
+        android:src="@drawable/fungal_late_blight"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -20,11 +23,13 @@
         android:id="@+id/categoryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Fungal"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/categoryImage"
-        app:layout_constraintStart_toStartOf="@id/categoryImage"
-        app:layout_constraintEnd_toEndOf="@id/categoryImage"
-        android:layout_marginTop="4dp"/>
-
+        android:textColor="#2E7D32"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

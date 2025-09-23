@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8FDF8">
 
     <!-- Основной контент -->
     <LinearLayout
@@ -15,15 +16,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="?attr/actionBarTheme" />
+            android:background="#2E7D32"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            android:background="#FFFFFF"
+            android:scrollbars="vertical"/>
     </LinearLayout>
 
     <!-- Боковое меню -->
@@ -32,6 +35,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#F1F8E9"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu" />
 

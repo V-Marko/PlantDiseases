@@ -1,6 +1,7 @@
 // AddDiseaseActivity.java
 package com.example.plantdiseases;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,6 +73,10 @@ public class AddDiseaseActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.action_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if(id == R.id.nav_home){
+            Intent intent = new Intent(this, CategoryAdapter.class);
+            startActivity(intent);
             return true;
         }
 

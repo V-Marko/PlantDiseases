@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ShapeableImageView;
+
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
@@ -51,7 +53,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        ImageButton categoryImageButton;
+        ShapeableImageView categoryImageButton;
         TextView categoryTextView;
 
         public CategoryViewHolder(@NonNull View itemView) {

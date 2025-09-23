@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8FDF8">
 
     <!-- Основной контент -->
     <LinearLayout
@@ -15,8 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="?attr/actionBarTheme" />
+            android:background="#2E7D32"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -24,12 +25,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button android:id="@+id/btnAdd" android:text="Добавить болезнь"
-                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnAdd"
+                android:text="Добавить болезнь"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#388E3C"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:layout_width="match_parent" android:layout_height="match_parent"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:scrollbars="vertical"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -39,6 +52,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#F1F8E9"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu" />
 
