@@ -1,12 +1,20 @@
+// AddDiseaseActivity.java
 package com.example.plantdiseases;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -17,10 +25,24 @@ public class AddDiseaseActivity extends AppCompatActivity {
     private Button btnSave;
     private FirebaseFirestore db;
 
+    private TextView navUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_disease);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Добавить болезнь");
+        }
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        navUsername = headerView.findViewById(R.id.nav_header_name);
+
+
 
         etName = findViewById(R.id.etName);
         etDescription = findViewById(R.id.etDescription);
@@ -29,6 +51,31 @@ public class AddDiseaseActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         btnSave.setOnClickListener(v -> saveDisease());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.nav_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        } else if (id == R.id.action_account) {
+            Toast.makeText(this, "Account clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_settings) {
+            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void saveDisease() {
@@ -48,5 +95,6 @@ public class AddDiseaseActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        navUsername.setText("Имя: " + name);
     }
 }

@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("LOGIN", "Login successful for user: " + name);
                                 Toast.makeText(this, "Вход выполнен!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(this, CategoryListActivity.class);
+                                intent.putExtra("USERNAME", name);
                                 startActivity(intent);
                                 finish();
                             } else {
