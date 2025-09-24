@@ -36,6 +36,9 @@
         <activity
             android:name=".CategoryListActivity"
             android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

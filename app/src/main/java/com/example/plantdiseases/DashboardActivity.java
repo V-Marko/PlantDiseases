@@ -97,7 +97,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-            Toast.makeText(this, "Account clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AccountActivity.class);
+            startActivity(intent);
             // startActivity(new Intent(this, AccountActivity.class));
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();

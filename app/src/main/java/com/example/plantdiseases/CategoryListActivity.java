@@ -1,4 +1,3 @@
-// CategoryListActivity.java
 package com.example.plantdiseases;
 
 import android.content.Intent;
@@ -41,14 +40,12 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_list);
 
-        // Инициализация Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Категории болезней");
         }
 
-        // Инициализация Navigation Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
@@ -61,7 +58,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Получение имени пользователя и установка в навигационный заголовок
         String username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
             View headerView = navigationView.getHeaderView(0);
@@ -95,7 +91,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
             Log.d("CATEGORY_LIST", "Category clicked: " + category);
             Intent intent = new Intent(this, MenuActivity.class);
             intent.putExtra("category", category);
-            // Передаем имя пользователя в MenuActivity если нужно
             if (username != null) {
                 intent.putExtra("USERNAME", username);
             }
@@ -104,7 +99,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         categoryRecyclerView.setAdapter(categoryAdapter);
 
-        // Add test categories
         categories.add("Fungal");
         categories.add("Bacterial");
         categories.add("Viral");
@@ -116,11 +110,14 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-            Toast.makeText(this, "Account clicked", Toast.LENGTH_SHORT).show();
-            return true;
+            Intent intent = new Intent(this, AccountActivity.class);
+            String username = getIntent().getStringExtra("USERNAME");
+            if (username != null) {
+                intent.putExtra("USERNAME", username);
+            }
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-            return true;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

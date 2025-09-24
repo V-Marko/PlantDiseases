@@ -1,4 +1,4 @@
-// AddDiseaseActivity.java
+
 package com.example.plantdiseases;
 
 import android.content.Intent;
@@ -25,7 +25,6 @@ public class AddDiseaseActivity extends AppCompatActivity {
     private EditText etName, etDescription, etSymptoms;
     private Button btnSave;
     private FirebaseFirestore db;
-
     private TextView navUsername;
 
     @Override
@@ -39,11 +38,16 @@ public class AddDiseaseActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Добавить болезнь");
         }
+
         NavigationView navigationView = findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        navUsername = headerView.findViewById(R.id.nav_header_name);
-
-
+        if (navigationView != null) {
+            View headerView = navigationView.getHeaderView(0);
+            navUsername = headerView.findViewById(R.id.nav_header_name);
+            String username = getIntent().getStringExtra("USERNAME");
+            if (username != null && navUsername != null) {
+                navUsername.setText("Имя: " + username);
+            }
+        }
 
         etName = findViewById(R.id.etName);
         etDescription = findViewById(R.id.etDescription);
@@ -57,7 +61,6 @@ public class AddDiseaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu, menu);
-
         return true;
     }
 
@@ -69,13 +72,22 @@ public class AddDiseaseActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         } else if (id == R.id.action_account) {
-            Toast.makeText(this, "Account clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AccountActivity.class);
+            String username = getIntent().getStringExtra("USERNAME");
+            if (username != null) {
+                intent.putExtra("USERNAME", username);
+            }
+            startActivity(intent);
             return true;
         } else if (id == R.id.action_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
             return true;
-        } else if(id == R.id.nav_home){
-            Intent intent = new Intent(this, CategoryAdapter.class);
+        } else if (id == R.id.nav_home) {
+            Intent intent = new Intent(this, CategoryListActivity.class);
+            String username = getIntent().getStringExtra("USERNAME");
+            if (username != null) {
+                intent.putExtra("USERNAME", username);
+            }
             startActivity(intent);
             return true;
         }
@@ -100,6 +112,5 @@ public class AddDiseaseActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Ошибка: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-        navUsername.setText("Имя: " + name);
     }
 }
