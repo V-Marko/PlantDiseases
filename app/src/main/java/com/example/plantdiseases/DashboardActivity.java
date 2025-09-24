@@ -1,4 +1,3 @@
-// DashboardActivity.java
 package com.example.plantdiseases;
 
 import android.content.Intent;
@@ -36,20 +35,19 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     private Toolbar toolbar;
     private TextView navUsername;
+    private TextView navHeaderEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Инициализация Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Панель управления");
         }
 
-        // Инициализация Navigation Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
@@ -62,14 +60,17 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Получение имени пользователя и установка в навигационный заголовок
         String username = getIntent().getStringExtra("USERNAME");
         if (username != null) {
             View headerView = navigationView.getHeaderView(0);
             navUsername = headerView.findViewById(R.id.nav_header_name);
+            navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
+
             if (navUsername != null) {
                 navUsername.setText("Имя: " + username);
             }
+
+            loadUserEmail(username);
         }
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -92,23 +93,52 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         loadDiseases();
     }
 
+    private void loadUserEmail(String username) {
+        db.collection("users").document(username).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String userEmail = documentSnapshot.getString("email");
+                        if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
+                            navHeaderEmail.setText("E-mail: "+ userEmail);
+                            navHeaderEmail.setVisibility(View.VISIBLE);
+
+                        } else if (navHeaderEmail != null) {
+                            navHeaderEmail.setVisibility(View.GONE);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (navHeaderEmail != null) {
+                        navHeaderEmail.setVisibility(View.GONE);
+                    }
+                });
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        String username = getIntent().getStringExtra("USERNAME");
 
         if (id == R.id.nav_account) {
             Intent intent = new Intent(this, AccountActivity.class);
+            if (username != null) {
+                intent.putExtra("USERNAME", username);
+            }
             startActivity(intent);
-            // startActivity(new Intent(this, AccountActivity.class));
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_home) {
+            Intent intent = new Intent(this, CategoryListActivity.class);
+            if (username != null) {
+                intent.putExtra("USERNAME", username);
+            }
+            startActivity(intent);
+            finish();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

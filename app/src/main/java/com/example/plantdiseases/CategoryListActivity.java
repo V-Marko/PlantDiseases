@@ -34,6 +34,7 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private Toolbar toolbar;
     private TextView navUsername;
+    private TextView navHeaderEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +63,15 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         if (username != null) {
             View headerView = navigationView.getHeaderView(0);
             navUsername = headerView.findViewById(R.id.nav_header_name);
+            navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
+
             if (navUsername != null) {
                 navUsername.setText("Имя: " + username);
             } else {
                 Log.e("CATEGORY_LIST", "nav_header_name not found in header");
             }
+
+            loadUserEmail(username);
         }
 
         categoryRecyclerView = findViewById(R.id.categoryRecyclerView);
@@ -105,20 +110,42 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         categoryAdapter.notifyDataSetChanged();
     }
 
+    private void loadUserEmail(String username) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(username).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String userEmail = documentSnapshot.getString("email");
+                        if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
+                            navHeaderEmail.setText("E-mail: "+ userEmail);
+                            navHeaderEmail.setVisibility(View.VISIBLE);
+                        } else if (navHeaderEmail != null) {
+                            navHeaderEmail.setVisibility(View.GONE);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("CATEGORY_LIST", "Error loading user email: " + e.getMessage());
+                    if (navHeaderEmail != null) {
+                        navHeaderEmail.setVisibility(View.GONE);
+                    }
+                });
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        String username = getIntent().getStringExtra("USERNAME");
 
         if (id == R.id.nav_account) {
             Intent intent = new Intent(this, AccountActivity.class);
-            String username = getIntent().getStringExtra("USERNAME");
             if (username != null) {
                 intent.putExtra("USERNAME", username);
             }
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-        }
+        } else if (id == R.id.nav_home) {}
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

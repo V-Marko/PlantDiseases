@@ -1,4 +1,3 @@
-
 package com.example.plantdiseases;
 
 import android.content.Context;

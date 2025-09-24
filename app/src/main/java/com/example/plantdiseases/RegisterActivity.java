@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText nameInput, passwordInput;
@@ -39,7 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            db.collection("users").document(name).set(new User(name, password))
+            Map<String, Object> user = new HashMap<>();
+            user.put("name", name);
+            user.put("password", password);
+            user.put("email", ""); 
+
+            db.collection("users").document(name).set(user)
                     .addOnSuccessListener(unused -> {
                         Toast.makeText(RegisterActivity.this, "Регистрация успешна!", Toast.LENGTH_SHORT).show();
                         finish();
