@@ -74,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
 
         textWelcome.setText(category);
         if (category.equals("Fungal")) {
-            String htmlText = "<h2><b>Фитофтороз (Late blight)</b></h2>\n" +
+            String htmlText = "<h2><font color=\"#2E7D32\"><b>Фитофтороз (Late blight)</b></font></h2><br/>\n" +
                     "<h3>Возбудитель</h3>" +
                     "<img src='fungal_reino_protista'/><br/>" +
                     "<p style='font-size: 20px; font-weight: 900; text-align: center;'><i>Phytophthora infestans</i> (оомицет)</p>" +

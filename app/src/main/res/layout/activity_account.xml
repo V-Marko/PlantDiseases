@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/account_edit_bg">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -37,54 +38,74 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Информация об аккаунте"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="24dp" />
+                    <!-- Заголовок в стиле category_item -->
+                    <LinearLayout
+                        android:id = "@+id/AboutAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Информация об аккаунте"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32" />
+
+                    </LinearLayout>
+
+                    <!-- Блок имени пользователя в стиле category_item -->
                     <LinearLayout
                         android:id="@+id/LinearLayoutName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Имя пользователя:"
                             android:textSize="16sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/accountName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
                             android:text="Имя пользователя"
                             android:textColor="#2E7D32"
                             android:textSize="18sp"
                             android:textStyle="bold" />
+
                     </LinearLayout>
 
-                    <!-- Добавляем обработчик клика и меняем layout для лучшей кликабельности -->
+                    <!-- Блок email в стиле category_item -->
                     <LinearLayout
                         android:id="@+id/LinearLayoutEmail"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:clickable="true"
-                        android:focusable="true"
-                        android:background="?attr/selectableItemBackground"
-                        android:padding="8dp">
+                        android:focusable="true">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Email:"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -94,8 +115,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="user@example.com"
-                            android:textSize="14sp"
-                            android:textColor="#555" />
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32"
+                            android:textSize="18sp" />
+
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>
@@ -103,10 +126,10 @@
 
         <LinearLayout
             android:id="@+id/emailEditPopup"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
-            android:background="@drawable/rounded_bg"
+            android:background="@drawable/edit_acc"
             android:visibility="gone"
             android:orientation="vertical"
             android:padding="16dp">
@@ -116,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="Изменение Email"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -128,8 +152,10 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:hint="Введите новый email"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:inputType="textEmailAddress"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
             <Button
                 android:id="@+id/saveEmailButton"
@@ -137,14 +163,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Сохранить"
-                android:layout_marginBottom="8dp"/>
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/white"/>
 
             <Button
                 android:id="@+id/cancelEmailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Отмена"/>
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="Отмена"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </FrameLayout>

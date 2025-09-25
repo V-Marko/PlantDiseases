@@ -37,13 +37,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:textColor="#4CAF50"
+                android:textColor="@color/black"
                 android:lineSpacingExtra="4dp"
                 android:layout_marginTop="30sp"
                 app:layout_constraintTop_toBottomOf="@id/textWelcome"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

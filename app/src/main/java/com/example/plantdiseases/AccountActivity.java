@@ -37,11 +37,12 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     private TextView navHeaderEmail;
     private FirebaseFirestore db;
 
-    private LinearLayout LinearLayoutEmail;
     private LinearLayout EmailEditPopup;
     private Button saveEmailButton, cancelEmailButton;
     private EditText emailEditText;
     private String userId;
+
+    private LinearLayout AboutAccount,LinearLayoutName,LinearLayoutEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +89,28 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         loadUserData(userId);
 
-        LinearLayoutEmail = findViewById(R.id.LinearLayoutEmail);
         EmailEditPopup = findViewById(R.id.emailEditPopup);
         saveEmailButton = findViewById(R.id.saveEmailButton);
         cancelEmailButton = findViewById(R.id.cancelEmailButton);
         emailEditText = findViewById(R.id.emailEditText);
 
+        AboutAccount = findViewById(R.id.AboutAccount);
+        LinearLayoutName = findViewById(R.id.LinearLayoutName);
+        LinearLayoutEmail = findViewById(R.id.LinearLayoutEmail);
+
         LinearLayoutEmail.setOnClickListener(v -> {
+
+
+
+
+
+
+
+            toolbar.setVisibility(GONE);
+
+            AboutAccount.setVisibility(GONE);
+            LinearLayoutName.setVisibility(GONE);
+            LinearLayoutEmail.setVisibility(GONE);
             String currentEmail = accountEmail.getText().toString();
             if (!currentEmail.equals("Email не указан")) {
                 emailEditText.setText(currentEmail);
@@ -103,12 +119,18 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         });
 
         saveEmailButton.setOnClickListener(v -> {
+
             saveEmailToDatabase();
         });
 
         cancelEmailButton.setOnClickListener(v -> {
             emailEditText.setText("");
             EmailEditPopup.setVisibility(GONE);
+
+            toolbar.setVisibility(VISIBLE);
+            AboutAccount.setVisibility(VISIBLE);
+            LinearLayoutName.setVisibility(VISIBLE);
+            LinearLayoutEmail.setVisibility(VISIBLE);
         });
     }
 
@@ -144,6 +166,11 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                     EmailEditPopup.setVisibility(GONE);
                     emailEditText.setText("");
                     Toast.makeText(this, "Email успешно сохранен!", Toast.LENGTH_SHORT).show();
+
+                    toolbar.setVisibility(VISIBLE);
+                    AboutAccount.setVisibility(VISIBLE);
+                    LinearLayoutName.setVisibility(VISIBLE);
+                    LinearLayoutEmail.setVisibility(VISIBLE);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Ошибка сохранения email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
