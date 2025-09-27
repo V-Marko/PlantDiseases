@@ -120,6 +120,37 @@
                             android:textSize="18sp" />
 
                     </LinearLayout>
+                    <!-- Блок Tell в стиле category_item -->
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutTell"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Tell:"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/accountTell"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="----"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
@@ -171,6 +202,65 @@
 
             <Button
                 android:id="@+id/cancelEmailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="Отмена"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tellEditPopup"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_acc"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="Изменение Телефон"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/tellEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:hint="Введите новый телефон"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:inputType="phone"
+                android:digits="0123456789"
+                android:layout_marginBottom="16dp" />
+
+
+            <Button
+                android:id="@+id/saveTellButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Сохранить"
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/cancelTellButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

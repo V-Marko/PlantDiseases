@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
             Map<String, Object> user = new HashMap<>();
             user.put("name", name);
             user.put("password", password);
-            user.put("email", ""); 
+            user.put("email", "");
 
             db.collection("users").document(name).set(user)
                     .addOnSuccessListener(unused -> {

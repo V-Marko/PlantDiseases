@@ -3,6 +3,7 @@ package com.example.plantdiseases;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     private Toolbar toolbar;
     private TextView accountName;
     private TextView accountEmail;
+    private TextView accountTell;
     private TextView navUsername;
     private TextView navHeaderEmail;
     private FirebaseFirestore db;
@@ -42,7 +44,11 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     private EditText emailEditText;
     private String userId;
 
-    private LinearLayout AboutAccount,LinearLayoutName,LinearLayoutEmail;
+    private LinearLayout AboutAccount,LinearLayoutName,LinearLayoutEmail,LinearLayoutTell;
+
+    private LinearLayout tellEditPopup;
+    private Button saveTellButton, cancelTellButton;
+    private EditText tellEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         accountName = findViewById(R.id.accountName);
         accountEmail = findViewById(R.id.accountEmail);
+        accountTell = findViewById(R.id.accountTell);
 
         db = FirebaseFirestore.getInstance();
 
@@ -89,6 +96,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         loadUserData(userId);
 
+        // E-mail элементы
         EmailEditPopup = findViewById(R.id.emailEditPopup);
         saveEmailButton = findViewById(R.id.saveEmailButton);
         cancelEmailButton = findViewById(R.id.cancelEmailButton);
@@ -97,41 +105,123 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         AboutAccount = findViewById(R.id.AboutAccount);
         LinearLayoutName = findViewById(R.id.LinearLayoutName);
         LinearLayoutEmail = findViewById(R.id.LinearLayoutEmail);
+        LinearLayoutTell = findViewById(R.id.LinearLayoutTell);
 
-        LinearLayoutEmail.setOnClickListener(v -> {
+        // Телефон элементы
+        tellEditText = findViewById(R.id.tellEditText);
+        tellEditPopup = findViewById(R.id.tellEditPopup);
+        saveTellButton = findViewById(R.id.saveTellButton);
+        cancelTellButton = findViewById(R.id.cancelTellButton);
 
+        // Обработка клика по телефону
+        LinearLayoutTell.setOnClickListener(v -> {
+            tellEditPopup.setVisibility(VISIBLE);
 
-
-
-
-
-
-            toolbar.setVisibility(GONE);
+            // Показываем текущий телефон в поле редактирования
+            String currentTell = accountTell.getText().toString();
+            if (!currentTell.equals("Телефон не указан")) {
+                tellEditText.setText(currentTell);
+            }
 
             AboutAccount.setVisibility(GONE);
             LinearLayoutName.setVisibility(GONE);
             LinearLayoutEmail.setVisibility(GONE);
-            String currentEmail = accountEmail.getText().toString();
-            if (!currentEmail.equals("Email не указан")) {
-                emailEditText.setText(currentEmail);
-            }
-            EmailEditPopup.setVisibility(VISIBLE);
+            LinearLayoutTell.setVisibility(GONE);
         });
 
-        saveEmailButton.setOnClickListener(v -> {
-
-            saveEmailToDatabase();
+        saveTellButton.setOnClickListener(v -> {
+            saveTellToDatabase();
         });
 
-        cancelEmailButton.setOnClickListener(v -> {
-            emailEditText.setText("");
-            EmailEditPopup.setVisibility(GONE);
+        cancelTellButton.setOnClickListener(v -> {
+            tellEditPopup.setVisibility(GONE);
+            tellEditText.setText("");
 
             toolbar.setVisibility(VISIBLE);
             AboutAccount.setVisibility(VISIBLE);
             LinearLayoutName.setVisibility(VISIBLE);
             LinearLayoutEmail.setVisibility(VISIBLE);
+            LinearLayoutTell.setVisibility(VISIBLE);
         });
+
+        // Обработка клика по email
+        LinearLayoutEmail.setOnClickListener(v -> {
+            EmailEditPopup.setVisibility(VISIBLE);
+
+            // Показываем текущий email в поле редактирования
+            String currentEmail = accountEmail.getText().toString();
+            if (!currentEmail.equals("Email не указан")) {
+                emailEditText.setText(currentEmail);
+            }
+
+            AboutAccount.setVisibility(GONE);
+            LinearLayoutName.setVisibility(GONE);
+            LinearLayoutEmail.setVisibility(GONE);
+            LinearLayoutTell.setVisibility(GONE);
+        });
+
+        saveEmailButton.setOnClickListener(v -> {
+            saveEmailToDatabase();
+        });
+
+        cancelEmailButton.setOnClickListener(v -> {
+            EmailEditPopup.setVisibility(GONE);
+            emailEditText.setText("");
+
+            toolbar.setVisibility(VISIBLE);
+            AboutAccount.setVisibility(VISIBLE);
+            LinearLayoutName.setVisibility(VISIBLE);
+            LinearLayoutEmail.setVisibility(VISIBLE);
+            LinearLayoutTell.setVisibility(VISIBLE);
+        });
+    }
+
+    private void saveTellToDatabase() {
+        String newTell = tellEditText.getText().toString().trim();
+
+        if (newTell.isEmpty()) {
+            Toast.makeText(this, "Введите телефон", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!android.util.Patterns.PHONE.matcher(newTell).matches()) {
+            Toast.makeText(this, "Введите корректный телефон", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (userId == null) {
+            Toast.makeText(this, "Ошибка: пользователь не определен", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("tell", newTell);
+
+        db.collection("users").document(userId)
+                .update(updates)
+                .addOnSuccessListener(aVoid -> {
+                    accountTell.setText(newTell);
+
+                    // Обновляем навигационную панель если нужно
+                    if (navHeaderEmail != null) {
+                        // Можно добавить отображение телефона в навигационной панели
+                        // navHeaderEmail.setText("Телефон: " + newTell);
+                        navHeaderEmail.setVisibility(View.VISIBLE);
+                    }
+
+                    tellEditPopup.setVisibility(GONE);
+                    tellEditText.setText("");
+                    Toast.makeText(this, "Телефон успешно сохранён!", Toast.LENGTH_SHORT).show();
+
+                    toolbar.setVisibility(VISIBLE);
+                    AboutAccount.setVisibility(VISIBLE);
+                    LinearLayoutName.setVisibility(VISIBLE);
+                    LinearLayoutEmail.setVisibility(VISIBLE);
+                    LinearLayoutTell.setVisibility(VISIBLE);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Ошибка сохранения телефона: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void saveEmailToDatabase() {
@@ -171,6 +261,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                     AboutAccount.setVisibility(VISIBLE);
                     LinearLayoutName.setVisibility(VISIBLE);
                     LinearLayoutEmail.setVisibility(VISIBLE);
+                    LinearLayoutTell.setVisibility(VISIBLE);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Ошибка сохранения email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -183,6 +274,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                     if (documentSnapshot.exists()) {
                         String fetchedName = documentSnapshot.getString("name");
                         String fetchedEmail = documentSnapshot.getString("email");
+                        String fetchedTell = documentSnapshot.getString("tell");
 
                         if (fetchedName != null) {
                             accountName.setText(fetchedName);
@@ -201,6 +293,13 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                             if (navHeaderEmail != null) {
                                 navHeaderEmail.setVisibility(View.GONE);
                             }
+                        }
+
+                        // Загрузка телефона
+                        if (fetchedTell != null && !fetchedTell.isEmpty()) {
+                            accountTell.setText(fetchedTell);
+                        } else {
+                            accountTell.setText("Телефон не указан");
                         }
                     } else {
                         Toast.makeText(this, "Пользователь не найден", Toast.LENGTH_SHORT).show();
@@ -231,6 +330,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
