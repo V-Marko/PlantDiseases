@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">PlantDiseases</string>
+
+    <!-- Drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Settings -->
+
+    <!-- Languages -->
+    <string-array name="languages">
+        <item>Հայերեն</item>
+        <item>Русский</item>
+        <item>English</item>
+    </string-array>
 </resources>

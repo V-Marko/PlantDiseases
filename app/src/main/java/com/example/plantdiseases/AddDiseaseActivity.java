@@ -104,7 +104,11 @@ public class AddDiseaseActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_settings) {
-            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SettingsActivity.class);
+            if (username != null) {
+                intent.putExtra("USERNAME", username); // ДОБАВЬТЕ ЭТУ СТРОКУ
+            }
+            startActivity(intent);
             return true;
         } else if (id == R.id.nav_home) {
             Intent intent = new Intent(this, CategoryListActivity.class);

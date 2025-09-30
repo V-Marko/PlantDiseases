@@ -321,15 +321,18 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                 intent.putExtra("USERNAME", username);
             }
             startActivity(intent);
-            finish(); // Закрываем текущую активность
+            finish();
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SettingsActivity.class);
+            if (username != null) {
+                intent.putExtra("USERNAME", username);
+            }
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
     @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
