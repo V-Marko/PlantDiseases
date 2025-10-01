@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,9 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
@@ -26,6 +31,10 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     private TextView navUsername;
     private TextView navHeaderEmail;
     private FirebaseFirestore db;
+    private Spinner spinner_language;
+
+    public String selectedLanguage = "en";
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,11 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
-        // Настройка переключателя Navigation Drawer
+        spinner_language = findViewById(R.id.spinner_language);
+
+        setupLanguageSpinner();
+
+        //Navigation Drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open,
@@ -51,15 +64,67 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Инициализация Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Загрузка данных пользователя
         loadUserData();
     }
 
+    private void setupLanguageSpinner() {
+        spinner_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLanguageDisplay = parent.getItemAtPosition(position).toString();
+
+                if (selectedLanguageDisplay.equals("English")) {
+                    selectedLanguage = "en";
+                } else if (selectedLanguageDisplay.equals("Русский")) {
+                    selectedLanguage = "ru";
+                } else if (selectedLanguageDisplay.equals("Հայերեն")) {
+                    selectedLanguage = "hy";
+                }
+
+                Log.i("Language", "Selected language: " + selectedLanguage + " (" + selectedLanguageDisplay + ")");
+
+                saveLanguageToDatabase(selectedLanguage);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i("Language", "No language selected");
+            }
+        });
+    }
+
+    private void saveLanguageToDatabase(String languageCode) {
+        if (username == null || username.isEmpty()) {
+            Log.e("SETTINGS", "Username not available for saving language");
+            return;
+        }
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("language", languageCode);
+
+        db.collection("users").document(username)
+                .update(updates)
+                .addOnSuccessListener(aVoid -> {
+                    Log.i("SETTINGS", "Language saved to database: " + languageCode);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("SETTINGS", "Error saving language to database: " + e.getMessage());
+                });
+    }
+
+    private String getLanguageDisplayName(String languageCode) {
+        switch (languageCode) {
+            case "en": return "English";
+            case "ru": return "Русский";
+            case "hy": return "Հայերեն";
+            default: return languageCode;
+        }
+    }
+
     private void loadUserData() {
-        String username = getIntent().getStringExtra("USERNAME");
+        username = getIntent().getStringExtra("USERNAME");
 
         if (username == null || username.isEmpty()) {
             Log.e("SETTINGS", "Username not provided in intent");
@@ -75,12 +140,18 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             navUsername.setText("Имя: " + username);
         }
 
-        // Загрузка email из Firestore
         db.collection("users").document(username).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String userEmail = documentSnapshot.getString("email");
                         String userTell = documentSnapshot.getString("tell");
+                        String userLanguage = documentSnapshot.getString("language");
+
+                        Log.i("Language", "Language from database: " + userLanguage);
+
+                        if (userLanguage != null && !userLanguage.isEmpty()) {
+                            setSpinnerLanguage(userLanguage);
+                        }
 
                         if (navHeaderEmail != null) {
                             if (userEmail != null && !userEmail.isEmpty()) {
@@ -106,6 +177,25 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 });
     }
 
+    private void setSpinnerLanguage(String languageCode) {
+        int position = 0; // По умолчанию English
+
+        switch (languageCode) {
+            case "en":
+                position = 0; // English
+                break;
+            case "ru":
+                position = 1; // Русский
+                break;
+            case "hy":
+                position = 2; // Հայերեն
+                break;
+        }
+
+        spinner_language.setSelection(position);
+        selectedLanguage = languageCode;
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -118,7 +208,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         } else if (id == R.id.nav_account) {
             intent = new Intent(this, AccountActivity.class);
         } else if (id == R.id.nav_settings) {
-            // Уже в настройках, просто закрываем drawer
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         }
@@ -144,5 +233,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         } else {
             super.onBackPressed();
         }
+    }
+
+    public String getLanguage(){
+        return selectedLanguage;
     }
 }

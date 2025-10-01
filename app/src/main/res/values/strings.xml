@@ -9,8 +9,8 @@
 
     <!-- Languages -->
     <string-array name="languages">
-        <item>Հայերեն</item>
-        <item>Русский</item>
         <item>English</item>
+        <item>Русский</item>
+        <item>Հայերեն</item>
     </string-array>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +68,10 @@ public class AddDiseaseActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String userEmail = documentSnapshot.getString("email");
+                        String userLanguage = documentSnapshot.getString("language");
+
+                        Log.i("Language", "Language from database: " + userLanguage);
+
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
                             navHeaderEmail.setText("E-mail: "+ userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
@@ -106,7 +111,7 @@ public class AddDiseaseActivity extends AppCompatActivity {
         } else if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             if (username != null) {
-                intent.putExtra("USERNAME", username); // ДОБАВЬТЕ ЭТУ СТРОКУ
+                intent.putExtra("USERNAME", username);
             }
             startActivity(intent);
             return true;

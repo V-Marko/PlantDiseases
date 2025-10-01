@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -96,7 +97,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         loadUserData(userId);
 
-        // E-mail элементы
+        // E-mail
         EmailEditPopup = findViewById(R.id.emailEditPopup);
         saveEmailButton = findViewById(R.id.saveEmailButton);
         cancelEmailButton = findViewById(R.id.cancelEmailButton);
@@ -107,17 +108,16 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         LinearLayoutEmail = findViewById(R.id.LinearLayoutEmail);
         LinearLayoutTell = findViewById(R.id.LinearLayoutTell);
 
-        // Телефон элементы
+        // tell
         tellEditText = findViewById(R.id.tellEditText);
         tellEditPopup = findViewById(R.id.tellEditPopup);
         saveTellButton = findViewById(R.id.saveTellButton);
         cancelTellButton = findViewById(R.id.cancelTellButton);
 
-        // Обработка клика по телефону
+        // update tell
         LinearLayoutTell.setOnClickListener(v -> {
             tellEditPopup.setVisibility(VISIBLE);
 
-            // Показываем текущий телефон в поле редактирования
             String currentTell = accountTell.getText().toString();
             if (!currentTell.equals("Телефон не указан")) {
                 tellEditText.setText(currentTell);
@@ -144,11 +144,9 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             LinearLayoutTell.setVisibility(VISIBLE);
         });
 
-        // Обработка клика по email
         LinearLayoutEmail.setOnClickListener(v -> {
             EmailEditPopup.setVisibility(VISIBLE);
 
-            // Показываем текущий email в поле редактирования
             String currentEmail = accountEmail.getText().toString();
             if (!currentEmail.equals("Email не указан")) {
                 emailEditText.setText(currentEmail);
@@ -275,6 +273,9 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                         String fetchedName = documentSnapshot.getString("name");
                         String fetchedEmail = documentSnapshot.getString("email");
                         String fetchedTell = documentSnapshot.getString("tell");
+                        String userLanguage = documentSnapshot.getString("language");
+
+                        Log.i("Language", "Language from database: " + userLanguage);
 
                         if (fetchedName != null) {
                             accountName.setText(fetchedName);

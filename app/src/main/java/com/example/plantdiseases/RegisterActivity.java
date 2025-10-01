@@ -46,6 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
             user.put("name", name);
             user.put("password", password);
             user.put("email", "");
+            user.put("language", "en");
+            user.put("tell", "");
 
             db.collection("users").document(name).set(user)
                     .addOnSuccessListener(unused -> {

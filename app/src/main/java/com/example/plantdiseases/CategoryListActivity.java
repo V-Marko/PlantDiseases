@@ -116,6 +116,9 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String userEmail = documentSnapshot.getString("email");
+                        String userLanguage = documentSnapshot.getString("language");
+                        Log.i("Language", "Language from database: " + userLanguage);
+
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
                             navHeaderEmail.setText("E-mail: "+ userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
