@@ -34,6 +34,8 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private Toolbar toolbar;
     private TextView navUsername;
+
+    private String currentLanguage = "ru";
     private TextView navHeaderEmail;
 
     @Override
@@ -43,9 +45,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Категории болезней");
-        }
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -71,7 +70,10 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                 Log.e("CATEGORY_LIST", "nav_header_name not found in header");
             }
 
-            loadUserEmail(username);
+            loadUserData(username); // Загружаем email и язык
+        } else {
+            // Если username нет, устанавливаем язык по умолчанию
+            setTitleBasedOnLanguage();
         }
 
         categoryRecyclerView = findViewById(R.id.categoryRecyclerView);
@@ -110,29 +112,59 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         categoryAdapter.notifyDataSetChanged();
     }
 
-    private void loadUserEmail(String username) {
+    private void loadUserData(String username) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(username).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String userEmail = documentSnapshot.getString("email");
                         String userLanguage = documentSnapshot.getString("language");
-                        Log.i("Language", "Language from database: " + userLanguage);
 
+                        // Обновляем язык
+                        if (userLanguage != null) {
+                            currentLanguage = userLanguage;
+                        }
+
+                        // Обновляем заголовок
+                        setTitleBasedOnLanguage();
+
+                        // Обновляем язык в адаптере
+                        if (categoryAdapter != null) {
+                            categoryAdapter.setLanguage(currentLanguage);
+                        }
+
+                        // Обновляем email
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
                             navHeaderEmail.setText("E-mail: "+ userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
                         } else if (navHeaderEmail != null) {
                             navHeaderEmail.setVisibility(View.GONE);
                         }
+                    } else {
+                        setTitleBasedOnLanguage();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("CATEGORY_LIST", "Error loading user email: " + e.getMessage());
+                    Log.e("CATEGORY_LIST", "Error loading user data: " + e.getMessage());
+                    setTitleBasedOnLanguage();
                     if (navHeaderEmail != null) {
                         navHeaderEmail.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    private void setTitleBasedOnLanguage() {
+        if (getSupportActionBar() != null) {
+            if(currentLanguage.equals("ru")){
+                getSupportActionBar().setTitle("Категории болезней");
+            }
+            else if(currentLanguage.equals("en")){
+                getSupportActionBar().setTitle("Disease categories");
+            }
+            else if(currentLanguage.equals("hy")){
+                getSupportActionBar().setTitle("Հիվանդության կատեգորիաներ");
+            }
+        }
     }
 
     @Override
@@ -157,6 +189,7 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
