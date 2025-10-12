@@ -43,9 +43,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Настройки");
-        }
+
+        // Устанавливаем заголовок
+        updateToolbarTitle();
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -54,13 +54,11 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         setupLanguageSpinner();
 
-        //Navigation Drawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        // Navigation Drawer - УБИРАЕМ ActionBarDrawerToggle для этой активности
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(v -> {
+            navigateToHome();
+        });
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -69,11 +67,58 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         loadUserData();
     }
 
+    private void updateToolbarTitle() {
+        if (getSupportActionBar() != null) {
+            if ("ru".equals(selectedLanguage)) {
+                getSupportActionBar().setTitle("Настройки");
+            } else if ("en".equals(selectedLanguage)) {
+                getSupportActionBar().setTitle("Settings");
+            } else if ("hy".equals(selectedLanguage)) {
+                getSupportActionBar().setTitle("Կարգավորումներ");
+            } else {
+                getSupportActionBar().setTitle("Настройки");
+            }
+        }
+    }
+
+    private void updateNavUsername() {
+        if (navUsername != null && username != null) {
+            if ("ru".equals(selectedLanguage)) {
+                navUsername.setText(username);
+            } else if ("en".equals(selectedLanguage)) {
+                navUsername.setText(username);
+            } else if ("hy".equals(selectedLanguage)) {
+                navUsername.setText( username);
+            } else {
+                navUsername.setText(username);
+            }
+        }
+    }
+
+    private void updateNavHeaderEmail() {
+        if (navHeaderEmail != null) {
+            // Если нужно обновить текст email на разных языках
+            // Пока оставляем как есть, так как email не зависит от языка
+        }
+    }
+
+    private void navigateToHome() {
+        String username = getIntent().getStringExtra("USERNAME");
+        Intent intent = new Intent(this, CategoryListActivity.class);
+        if (username != null) {
+            intent.putExtra("USERNAME", username);
+        }
+        startActivity(intent);
+        finish();
+    }
+
     private void setupLanguageSpinner() {
         spinner_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedLanguageDisplay = parent.getItemAtPosition(position).toString();
+
+                String oldLanguage = selectedLanguage;
 
                 if (selectedLanguageDisplay.equals("English")) {
                     selectedLanguage = "en";
@@ -85,6 +130,10 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
                 Log.i("Language", "Selected language: " + selectedLanguage + " (" + selectedLanguageDisplay + ")");
 
+                // Обновляем интерфейс сразу
+                updateUIAfterLanguageChange();
+
+                // Сохраняем в базу данных
                 saveLanguageToDatabase(selectedLanguage);
             }
 
@@ -94,6 +143,17 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             }
         });
     }
+
+    private void updateUIAfterLanguageChange() {
+        updateToolbarTitle();
+
+        updateNavUsername();
+        updateNavHeaderEmail();
+
+        updateOtherUITexts();
+    }
+
+    private void updateOtherUITexts() {}
 
     private void saveLanguageToDatabase(String languageCode) {
         if (username == null || username.isEmpty()) {
@@ -108,19 +168,47 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 .update(updates)
                 .addOnSuccessListener(aVoid -> {
                     Log.i("SETTINGS", "Language saved to database: " + languageCode);
+                    showToast(getTranslatedMessage("language_saved"));
                 })
                 .addOnFailureListener(e -> {
                     Log.e("SETTINGS", "Error saving language to database: " + e.getMessage());
+                    showToast(getTranslatedMessage("language_save_error") + e.getMessage());
                 });
     }
 
-    private String getLanguageDisplayName(String languageCode) {
-        switch (languageCode) {
-            case "en": return "English";
-            case "ru": return "Русский";
-            case "hy": return "Հայերեն";
-            default: return languageCode;
+    private String getTranslatedMessage(String key) {
+        switch (key) {
+            case "language_saved":
+                if ("ru".equals(selectedLanguage)) return "Язык сохранен!";
+                if ("en".equals(selectedLanguage)) return "Language saved!";
+                if ("hy".equals(selectedLanguage)) return("Լեզուն պահպանված է!");
+                return "Язык сохранен!";
+
+            case "language_save_error":
+                if ("ru".equals(selectedLanguage)) return "Ошибка сохранения языка: ";
+                if ("en".equals(selectedLanguage)) return "Error saving language: ";
+                if ("hy".equals(selectedLanguage)) return "Լեզուի պահպանման սխալ՝ ";
+                return "Ошибка сохранения языка: ";
+
+            case "user_data_error":
+                if ("ru".equals(selectedLanguage)) return "Ошибка: данные пользователя не загружены";
+                if ("en".equals(selectedLanguage)) return "Error: user data not loaded";
+                if ("hy".equals(selectedLanguage)) return "Սխալ՝ օգտատիրոջ տվյալները չեն բեռնվել";
+                return "Ошибка: данные пользователя не загружены";
+
+            case "user_load_error":
+                if ("ru".equals(selectedLanguage)) return "Ошибка загрузки данных пользователя";
+                if ("en".equals(selectedLanguage)) return "Error loading user data";
+                if ("hy".equals(selectedLanguage)) return "Օգտատիրոջ տվյալների բեռնման սխալ";
+                return "Ошибка загрузки данных пользователя";
+
+            default:
+                return key;
         }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void loadUserData() {
@@ -128,7 +216,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         if (username == null || username.isEmpty()) {
             Log.e("SETTINGS", "Username not provided in intent");
-            Toast.makeText(this, "Ошибка: данные пользователя не загружены", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("user_data_error"));
             return;
         }
 
@@ -136,9 +224,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         navUsername = headerView.findViewById(R.id.nav_header_name);
         navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
 
-        if (navUsername != null) {
-            navUsername.setText("Имя: " + username);
-        }
+        updateNavUsername();
 
         db.collection("users").document(username).get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -151,11 +237,21 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
                         if (userLanguage != null && !userLanguage.isEmpty()) {
                             setSpinnerLanguage(userLanguage);
+                            selectedLanguage = userLanguage;
+                            updateUIAfterLanguageChange(); // Обновляем интерфейс после загрузки языка
                         }
 
                         if (navHeaderEmail != null) {
                             if (userEmail != null && !userEmail.isEmpty()) {
-                                navHeaderEmail.setText("E-mail: " + userEmail);
+                                if ("ru".equals(selectedLanguage)) {
+                                    navHeaderEmail.setText( userEmail);
+                                } else if ("en".equals(selectedLanguage)) {
+                                    navHeaderEmail.setText(userEmail);
+                                } else if ("hy".equals(selectedLanguage)) {
+                                    navHeaderEmail.setText(userEmail);
+                                } else {
+                                    navHeaderEmail.setText(userEmail);
+                                }
                                 navHeaderEmail.setVisibility(View.VISIBLE);
                             } else {
                                 navHeaderEmail.setVisibility(View.GONE);
@@ -173,7 +269,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                     if (navHeaderEmail != null) {
                         navHeaderEmail.setVisibility(View.GONE);
                     }
-                    Toast.makeText(this, "Ошибка загрузки данных пользователя", Toast.LENGTH_SHORT).show();
+                    showToast(getTranslatedMessage("user_load_error"));
                 });
     }
 
@@ -204,7 +300,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         Intent intent = null;
 
         if (id == R.id.nav_home) {
-            intent = new Intent(this, CategoryListActivity.class);
+            navigateToHome();
+            return true;
         } else if (id == R.id.nav_account) {
             intent = new Intent(this, AccountActivity.class);
         } else if (id == R.id.nav_settings) {
@@ -217,9 +314,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 intent.putExtra("USERNAME", username);
             }
             startActivity(intent);
-            if (id == R.id.nav_home) {
-                finish();
-            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -227,11 +321,20 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            navigateToHome();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            navigateToHome();
         }
     }
 

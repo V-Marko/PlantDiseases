@@ -51,6 +51,8 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
     private Button saveTellButton, cancelTellButton;
     private EditText tellEditText;
 
+    private String setLanguage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +60,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Аккаунт");
-        }
+        updateTitle(); // Обновляем заголовок в зависимости от языка
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -87,11 +87,11 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
 
             if (navUsername != null) {
-                navUsername.setText("Имя: " + userId);
+                updateNavUsername(); // Обновляем текст в зависимости от языка
             }
             accountName.setText(userId);
         } else {
-            Toast.makeText(this, "Ошибка: имя пользователя не передано", Toast.LENGTH_SHORT).show();
+            showToast("Ошибка: имя пользователя не передано");
             return;
         }
 
@@ -119,7 +119,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             tellEditPopup.setVisibility(VISIBLE);
 
             String currentTell = accountTell.getText().toString();
-            if (!currentTell.equals("Телефон не указан")) {
+            if (!currentTell.equals(getString(R.string.phone_not_specified))) {
                 tellEditText.setText(currentTell);
             }
 
@@ -148,7 +148,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
             EmailEditPopup.setVisibility(VISIBLE);
 
             String currentEmail = accountEmail.getText().toString();
-            if (!currentEmail.equals("Email не указан")) {
+            if (!currentEmail.equals(getString(R.string.email_not_specified))) {
                 emailEditText.setText(currentEmail);
             }
 
@@ -174,21 +174,126 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         });
     }
 
+    private void updateTitle() {
+        if (getSupportActionBar() != null) {
+            if ("ru".equals(setLanguage)) {
+                getSupportActionBar().setTitle("Аккаунт");
+            } else if ("en".equals(setLanguage)) {
+                getSupportActionBar().setTitle("Account");
+            } else if ("hy".equals(setLanguage)) {
+                getSupportActionBar().setTitle("Հաշիվ");
+            } else {
+                getSupportActionBar().setTitle("Аккаунт");
+            }
+        }
+    }
+
+    private void updateNavUsername() {
+        if (navUsername != null && userId != null) {
+            if ("ru".equals(setLanguage)) {
+                navUsername.setText(userId);
+            } else if ("en".equals(setLanguage)) {
+                navUsername.setText(userId);
+            } else if ("hy".equals(setLanguage)) {
+                navUsername.setText(userId);
+            } else {
+                navUsername.setText(userId);
+            }
+        }
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private String getTranslatedMessage(String key) {
+        switch (key) {
+            case "enter_phone":
+                if ("ru".equals(setLanguage)) return "Введите телефон";
+                if ("en".equals(setLanguage)) return "Enter phone number";
+                if ("hy".equals(setLanguage)) return "Մուտքագրեք հեռախոսահամարը";
+                return "Введите телефон";
+
+            case "enter_valid_phone":
+                if ("ru".equals(setLanguage)) return "Введите корректный телефон";
+                if ("en".equals(setLanguage)) return "Enter valid phone number";
+                if ("hy".equals(setLanguage)) return "Մուտքագրեք վավեր հեռախոսահամար";
+                return "Введите корректный телефон";
+
+            case "user_not_defined":
+                if ("ru".equals(setLanguage)) return "Ошибка: пользователь не определен";
+                if ("en".equals(setLanguage)) return "Error: user not defined";
+                if ("hy".equals(setLanguage)) return "Սխալ՝ օգտատերը չի սահմանված";
+                return "Ошибка: пользователь не определен";
+
+            case "phone_saved":
+                if ("ru".equals(setLanguage)) return "Телефон успешно сохранён!";
+                if ("en".equals(setLanguage)) return "Phone number saved successfully!";
+                if ("hy".equals(setLanguage)) return "Հեռախոսահամարը հաջողությամբ պահպանված է";
+                return "Телефон успешно сохранён!";
+
+            case "phone_save_error":
+                if ("ru".equals(setLanguage)) return "Ошибка сохранения телефона: ";
+                if ("en".equals(setLanguage)) return "Error saving phone: ";
+                if ("hy".equals(setLanguage)) return "Հեռախոսի պահպանման սխալ՝ ";
+                return "Ошибка сохранения телефона: ";
+
+            case "enter_email":
+                if ("ru".equals(setLanguage)) return "Введите email";
+                if ("en".equals(setLanguage)) return "Enter email";
+                if ("hy".equals(setLanguage)) return "Մուտքագրեք email";
+                return "Введите email";
+
+            case "enter_valid_email":
+                if ("ru".equals(setLanguage)) return "Введите корректный email";
+                if ("en".equals(setLanguage)) return "Enter valid email";
+                if ("hy".equals(setLanguage)) return "Մուտքագրեք վավեր email";
+                return "Введите корректный email";
+
+            case "email_saved":
+                if ("ru".equals(setLanguage)) return "Email успешно сохранен!";
+                if ("en".equals(setLanguage)) return "Email saved successfully!";
+                if ("hy".equals(setLanguage)) return "Email-ը հաջողությամբ պահպանված է";
+                return "Email успешно сохранен!";
+
+            case "email_save_error":
+                if ("ru".equals(setLanguage)) return "Ошибка сохранения email: ";
+                if ("en".equals(setLanguage)) return "Error saving email: ";
+                if ("hy".equals(setLanguage)) return "Email-ի պահպանման սխալ՝ ";
+                return "Ошибка сохранения email: ";
+
+            case "user_not_found":
+                if ("ru".equals(setLanguage)) return "Пользователь не найден";
+                if ("en".equals(setLanguage)) return "User not found";
+                if ("hy".equals(setLanguage)) return "Օգտատերը չի գտնվել";
+                return "Пользователь не найден";
+
+            case "load_data_error":
+                if ("ru".equals(setLanguage)) return "Ошибка загрузки данных: ";
+                if ("en".equals(setLanguage)) return "Error loading data: ";
+                if ("hy".equals(setLanguage)) return "Տվյալների բեռնման սխալ՝ ";
+                return "Ошибка загрузки данных: ";
+
+            default:
+                return key;
+        }
+    }
+
     private void saveTellToDatabase() {
         String newTell = tellEditText.getText().toString().trim();
 
         if (newTell.isEmpty()) {
-            Toast.makeText(this, "Введите телефон", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("enter_phone"));
             return;
         }
 
         if (!android.util.Patterns.PHONE.matcher(newTell).matches()) {
-            Toast.makeText(this, "Введите корректный телефон", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("enter_valid_phone"));
             return;
         }
 
         if (userId == null) {
-            Toast.makeText(this, "Ошибка: пользователь не определен", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("user_not_defined"));
             return;
         }
 
@@ -200,16 +305,9 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                 .addOnSuccessListener(aVoid -> {
                     accountTell.setText(newTell);
 
-                    // Обновляем навигационную панель если нужно
-                    if (navHeaderEmail != null) {
-                        // Можно добавить отображение телефона в навигационной панели
-                        // navHeaderEmail.setText("Телефон: " + newTell);
-                        navHeaderEmail.setVisibility(View.VISIBLE);
-                    }
-
                     tellEditPopup.setVisibility(GONE);
                     tellEditText.setText("");
-                    Toast.makeText(this, "Телефон успешно сохранён!", Toast.LENGTH_SHORT).show();
+                    showToast(getTranslatedMessage("phone_saved"));
 
                     toolbar.setVisibility(VISIBLE);
                     AboutAccount.setVisibility(VISIBLE);
@@ -218,7 +316,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                     LinearLayoutTell.setVisibility(VISIBLE);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Ошибка сохранения телефона: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    showToast(getTranslatedMessage("phone_save_error") + e.getMessage());
                 });
     }
 
@@ -226,17 +324,17 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         String newEmail = emailEditText.getText().toString().trim();
 
         if (newEmail.isEmpty()) {
-            Toast.makeText(this, "Введите email", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("enter_email"));
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) {
-            Toast.makeText(this, "Введите корректный email", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("enter_valid_email"));
             return;
         }
 
         if (userId == null) {
-            Toast.makeText(this, "Ошибка: пользователь не определен", Toast.LENGTH_SHORT).show();
+            showToast(getTranslatedMessage("user_not_defined"));
             return;
         }
 
@@ -248,12 +346,20 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                 .addOnSuccessListener(aVoid -> {
                     accountEmail.setText(newEmail);
                     if (navHeaderEmail != null) {
-                        navHeaderEmail.setText("E-mail: "+ newEmail);
+                        if ("ru".equals(setLanguage)) {
+                            navHeaderEmail.setText(newEmail);
+                        } else if ("en".equals(setLanguage)) {
+                            navHeaderEmail.setText(newEmail);
+                        } else if ("hy".equals(setLanguage)) {
+                            navHeaderEmail.setText(newEmail);
+                        } else {
+                            navHeaderEmail.setText(newEmail);
+                        }
                         navHeaderEmail.setVisibility(View.VISIBLE);
                     }
                     EmailEditPopup.setVisibility(GONE);
                     emailEditText.setText("");
-                    Toast.makeText(this, "Email успешно сохранен!", Toast.LENGTH_SHORT).show();
+                    showToast(getTranslatedMessage("email_saved"));
 
                     toolbar.setVisibility(VISIBLE);
                     AboutAccount.setVisibility(VISIBLE);
@@ -262,7 +368,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                     LinearLayoutTell.setVisibility(VISIBLE);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Ошибка сохранения email: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    showToast(getTranslatedMessage("email_save_error") + e.getMessage());
                 });
     }
 
@@ -274,23 +380,35 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                         String fetchedEmail = documentSnapshot.getString("email");
                         String fetchedTell = documentSnapshot.getString("tell");
                         String userLanguage = documentSnapshot.getString("language");
-
+                        setLanguage = userLanguage;
                         Log.i("Language", "Language from database: " + userLanguage);
+
+                        // Обновляем интерфейс после загрузки языка
+                        updateTitle();
+                        updateNavUsername();
 
                         if (fetchedName != null) {
                             accountName.setText(fetchedName);
                         } else {
-                            Toast.makeText(this, "Имя пользователя не найдено", Toast.LENGTH_SHORT).show();
+                            showToast("Имя пользователя не найдено");
                         }
 
                         if (fetchedEmail != null && !fetchedEmail.isEmpty()) {
                             accountEmail.setText(fetchedEmail);
                             if (navHeaderEmail != null) {
-                                navHeaderEmail.setText("E-mail: "+ fetchedEmail);
+                                if ("ru".equals(setLanguage)) {
+                                    navHeaderEmail.setText(fetchedEmail);
+                                } else if ("en".equals(setLanguage)) {
+                                    navHeaderEmail.setText(fetchedEmail);
+                                } else if ("hy".equals(setLanguage)) {
+                                    navHeaderEmail.setText( fetchedEmail);
+                                } else {
+                                    navHeaderEmail.setText(fetchedEmail);
+                                }
                                 navHeaderEmail.setVisibility(View.VISIBLE);
                             }
                         } else {
-                            accountEmail.setText("Email не указан");
+                            accountEmail.setText(getString(R.string.email_not_specified));
                             if (navHeaderEmail != null) {
                                 navHeaderEmail.setVisibility(View.GONE);
                             }
@@ -300,14 +418,14 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
                         if (fetchedTell != null && !fetchedTell.isEmpty()) {
                             accountTell.setText(fetchedTell);
                         } else {
-                            accountTell.setText("Телефон не указан");
+                            accountTell.setText(getString(R.string.phone_not_specified));
                         }
                     } else {
-                        Toast.makeText(this, "Пользователь не найден", Toast.LENGTH_SHORT).show();
+                        showToast(getTranslatedMessage("user_not_found"));
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Ошибка загрузки данных: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    showToast(getTranslatedMessage("load_data_error") + e.getMessage());
                 });
     }
 
@@ -334,6 +452,7 @@ public class AccountActivity extends AppCompatActivity implements NavigationView
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {

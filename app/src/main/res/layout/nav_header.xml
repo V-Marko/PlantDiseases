@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:background="#2E7D32"
@@ -7,6 +8,7 @@
     android:gravity="bottom">
 
     <TextView
+        android:id="@+id/nav_header_app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Plant Diseases App"
@@ -15,20 +17,72 @@
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
 
-    <TextView
-        android:id="@+id/nav_header_name"
+    <!-- Имя с иконкой -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Имя: ..."
-        android:textColor="#E8F5E9"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
 
-    <TextView
-        android:id="@+id/nav_header_email"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_name"
+            android:layout_marginEnd="8dp"
+            app:tint="#E8F5E9" />
+
+        <TextView
+            android:id="@+id/nav_header_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#E8F5E9"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/nav_header_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textColor="#E8F5E9"
+            android:textSize="16sp"
+            android:layout_marginStart="4dp"/>
+
+    </LinearLayout>
+
+    <!-- Email с иконкой -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email: ..."
-        android:textColor="#E8F5E9"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_email"
+            android:layout_marginEnd="8dp"
+            app:tint="#E8F5E9" />
+
+        <TextView
+            android:id="@+id/nav_header_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#E8F5E9"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/nav_header_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textColor="#E8F5E9"
+            android:textSize="16sp"
+            android:layout_marginStart="4dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

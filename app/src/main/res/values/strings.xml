@@ -13,4 +13,6 @@
         <item>Русский</item>
         <item>Հայերեն</item>
     </string-array>
+    <string name="email_not_specified">Email-ը նշված չէ</string>
+    <string name="phone_not_specified">Հեռախոսահամարը նշված չէ</string>
 </resources>

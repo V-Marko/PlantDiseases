@@ -28,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private String InforamitonDisease = "Информация о болезни";
     private String htmlText;
-    private String currentLanguage = "ru"; // язык по умолчанию
+    private String currentLanguage = "ru";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
         }
         db = FirebaseFirestore.getInstance();
         if (db == null) {
-            Log.e("MENU_ACTIVITY", "Firestore initialization failed");
+            Log.e("MENU_ACTIVIT Y", "Firestore initialization failed");
             Toast.makeText(this, "Ошибка инициализации Firestore", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -79,7 +79,6 @@ public class MenuActivity extends AppCompatActivity {
         if (username != null) {
             loadUserLanguage(username);
         } else {
-            // Если username нет, просто устанавливаем текст
             setLanguageText();
             loadCategoryContent();
         }
@@ -93,7 +92,6 @@ public class MenuActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String userLanguage = documentSnapshot.getString("language");
-                        // ЛОГИРОВАНИЕ ЯЗЫКА ИЗ БАЗЫ ДАННЫХ
                         Log.i("Language", "Language from database: " + userLanguage);
 
                         if (userLanguage != null) {

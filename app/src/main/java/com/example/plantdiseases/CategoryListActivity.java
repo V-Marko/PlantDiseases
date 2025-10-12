@@ -2,6 +2,7 @@ package com.example.plantdiseases;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
@@ -65,7 +66,7 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
             navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
 
             if (navUsername != null) {
-                navUsername.setText("Имя: " + username);
+                navUsername.setText(username);
             } else {
                 Log.e("CATEGORY_LIST", "nav_header_name not found in header");
             }
@@ -74,6 +75,7 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         } else {
             // Если username нет, устанавливаем язык по умолчанию
             setTitleBasedOnLanguage();
+            updateNavigationMenuText(); // Обновляем меню
         }
 
         categoryRecyclerView = findViewById(R.id.categoryRecyclerView);
@@ -112,6 +114,26 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         categoryAdapter.notifyDataSetChanged();
     }
 
+    // Метод для обновления текста в меню навигации
+    private void updateNavigationMenuText() {
+        Menu menu = navigationView.getMenu();
+
+        if ("en".equals(currentLanguage)) {
+            menu.findItem(R.id.nav_home).setTitle("Home");
+            menu.findItem(R.id.nav_account).setTitle("My Account");
+            menu.findItem(R.id.nav_settings).setTitle("App Settings");
+        } else if ("hy".equals(currentLanguage)) {
+            menu.findItem(R.id.nav_home).setTitle("Տուն");
+            menu.findItem(R.id.nav_account).setTitle("Իմ հաշիվը");
+            menu.findItem(R.id.nav_settings).setTitle("Ծրագրի կարգավորումներ");
+        } else {
+            // Русский по умолчанию
+            menu.findItem(R.id.nav_home).setTitle("Дом");
+            menu.findItem(R.id.nav_account).setTitle("Мой аккаунт");
+            menu.findItem(R.id.nav_settings).setTitle("Настройки приложения");
+        }
+    }
+
     private void loadUserData(String username) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(username).get()
@@ -125,48 +147,63 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                             currentLanguage = userLanguage;
                         }
 
-                        // Обновляем заголовок
+                        // Обновляем все текстовые элементы
                         setTitleBasedOnLanguage();
+                        updateNavigationMenuText();
+                        updateNavHeaderText();
 
                         // Обновляем язык в адаптере
                         if (categoryAdapter != null) {
                             categoryAdapter.setLanguage(currentLanguage);
                         }
 
-                        // Обновляем email
+                        // Обновляем email (email остается тем же, меняется только метка)
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
-                            navHeaderEmail.setText("E-mail: "+ userEmail);
+                            navHeaderEmail.setText(userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
                         } else if (navHeaderEmail != null) {
                             navHeaderEmail.setVisibility(View.GONE);
                         }
                     } else {
                         setTitleBasedOnLanguage();
+                        updateNavigationMenuText();
+                        updateNavHeaderText(); // ← И ЭТУ СТРОЧКУ
                     }
                 })
                 .addOnFailureListener(e -> {
                     Log.e("CATEGORY_LIST", "Error loading user data: " + e.getMessage());
                     setTitleBasedOnLanguage();
+                    updateNavigationMenuText();
+                    updateNavHeaderText(); // ← И ЭТУ СТРОЧКУ
                     if (navHeaderEmail != null) {
                         navHeaderEmail.setVisibility(View.GONE);
                     }
                 });
     }
-
     private void setTitleBasedOnLanguage() {
         if (getSupportActionBar() != null) {
-            if(currentLanguage.equals("ru")){
+            if ("ru".equals(currentLanguage)) {
                 getSupportActionBar().setTitle("Категории болезней");
-            }
-            else if(currentLanguage.equals("en")){
+            } else if ("en".equals(currentLanguage)) {
                 getSupportActionBar().setTitle("Disease categories");
-            }
-            else if(currentLanguage.equals("hy")){
+            } else if ("hy".equals(currentLanguage)) {
                 getSupportActionBar().setTitle("Հիվանդության կատեգորիաներ");
             }
         }
     }
-
+    private void updateNavHeaderText() {
+        View headerView = navigationView.getHeaderView(0);
+        TextView navHeaderAppName = headerView.findViewById(R.id.nav_header_app_name);
+        if (navHeaderAppName != null) {
+            if ("en".equals(currentLanguage)) {
+                navHeaderAppName.setText("Plant Diseases App");
+            } else if ("hy".equals(currentLanguage)) {
+                navHeaderAppName.setText("Բույսերի Հիվանդությունների Հավելված");
+            } else {
+                navHeaderAppName.setText("Plant Diseases App");
+            }
+        }
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -184,7 +221,9 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                 intent.putExtra("USERNAME", username);
             }
             startActivity(intent);
-        } else if (id == R.id.nav_home) {}
+        } else if (id == R.id.nav_home) {
+            // Уже находимся на главной, ничего не делаем
+        }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

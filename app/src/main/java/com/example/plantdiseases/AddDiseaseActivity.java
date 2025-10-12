@@ -48,7 +48,7 @@ public class AddDiseaseActivity extends AppCompatActivity {
 
             String username = getIntent().getStringExtra("USERNAME");
             if (username != null && navUsername != null) {
-                navUsername.setText("Имя: " + username);
+                navUsername.setText(username);
                 loadUserEmail(username);
             }
         }
@@ -73,7 +73,7 @@ public class AddDiseaseActivity extends AppCompatActivity {
                         Log.i("Language", "Language from database: " + userLanguage);
 
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
-                            navHeaderEmail.setText("E-mail: "+ userEmail);
+                            navHeaderEmail.setText(userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
                         } else if (navHeaderEmail != null) {
                             navHeaderEmail.setVisibility(View.GONE);

@@ -68,7 +68,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
 
             if (navUsername != null) {
-                navUsername.setText("Имя: " + username);
+                navUsername.setText(username);
             }
 
             loadUserEmail(username);
@@ -104,7 +104,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                         Log.i("Language", "Language from database: " + userLanguage);
 
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
-                            navHeaderEmail.setText("E-mail: "+ userEmail);
+                            navHeaderEmail.setText(userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
 
                         } else if (navHeaderEmail != null) {
