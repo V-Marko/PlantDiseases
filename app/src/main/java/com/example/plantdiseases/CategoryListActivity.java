@@ -71,11 +71,10 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                 Log.e("CATEGORY_LIST", "nav_header_name not found in header");
             }
 
-            loadUserData(username); // Загружаем email и язык
+            loadUserData(username);
         } else {
-            // Если username нет, устанавливаем язык по умолчанию
             setTitleBasedOnLanguage();
-            updateNavigationMenuText(); // Обновляем меню
+            updateNavigationMenuText();
         }
 
         categoryRecyclerView = findViewById(R.id.categoryRecyclerView);
@@ -114,7 +113,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
         categoryAdapter.notifyDataSetChanged();
     }
 
-    // Метод для обновления текста в меню навигации
     private void updateNavigationMenuText() {
         Menu menu = navigationView.getMenu();
 
@@ -127,7 +125,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
             menu.findItem(R.id.nav_account).setTitle("Իմ հաշիվը");
             menu.findItem(R.id.nav_settings).setTitle("Ծրագրի կարգավորումներ");
         } else {
-            // Русский по умолчанию
             menu.findItem(R.id.nav_home).setTitle("Дом");
             menu.findItem(R.id.nav_account).setTitle("Мой аккаунт");
             menu.findItem(R.id.nav_settings).setTitle("Настройки приложения");
@@ -142,22 +139,18 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                         String userEmail = documentSnapshot.getString("email");
                         String userLanguage = documentSnapshot.getString("language");
 
-                        // Обновляем язык
                         if (userLanguage != null) {
                             currentLanguage = userLanguage;
                         }
 
-                        // Обновляем все текстовые элементы
                         setTitleBasedOnLanguage();
                         updateNavigationMenuText();
                         updateNavHeaderText();
 
-                        // Обновляем язык в адаптере
                         if (categoryAdapter != null) {
                             categoryAdapter.setLanguage(currentLanguage);
                         }
 
-                        // Обновляем email (email остается тем же, меняется только метка)
                         if (userEmail != null && !userEmail.isEmpty() && navHeaderEmail != null) {
                             navHeaderEmail.setText(userEmail);
                             navHeaderEmail.setVisibility(View.VISIBLE);
@@ -167,14 +160,14 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                     } else {
                         setTitleBasedOnLanguage();
                         updateNavigationMenuText();
-                        updateNavHeaderText(); // ← И ЭТУ СТРОЧКУ
+                        updateNavHeaderText();
                     }
                 })
                 .addOnFailureListener(e -> {
                     Log.e("CATEGORY_LIST", "Error loading user data: " + e.getMessage());
                     setTitleBasedOnLanguage();
                     updateNavigationMenuText();
-                    updateNavHeaderText(); // ← И ЭТУ СТРОЧКУ
+                    updateNavHeaderText();
                     if (navHeaderEmail != null) {
                         navHeaderEmail.setVisibility(View.GONE);
                     }
@@ -221,8 +214,6 @@ public class CategoryListActivity extends AppCompatActivity implements Navigatio
                 intent.putExtra("USERNAME", username);
             }
             startActivity(intent);
-        } else if (id == R.id.nav_home) {
-            // Уже находимся на главной, ничего не делаем
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
