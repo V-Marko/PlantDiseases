@@ -438,8 +438,656 @@ public class MenuActivity extends AppCompatActivity {
                     return drawable;
                 }
             }, null));
-        } else {
-            textInfo.setText("Информация о категории " + category + " пока недоступна.");
+        }
+
+        if (category.equals("Bacterial")) {
+            if (currentLanguage.equals("en")) {
+                htmlText = "<h2><font color=\"#2E7D32\"><b>Late Blight</b></font></h2><br/>\n" +
+                        "<h3>Pathogen</h3>" +
+                        "<img src='fungal_reino_protista'/><br/>" +
+                        "<p style='font-size: 20px; font-weight: 900; text-align: center;'><i>Phytophthora infestans</i> (oomycete)</p>" +
+                        "<h3>Host Range</h3>"+
+                        "<p>Tomato, pepper, eggplant, potato, and other solanaceous crops.</p><br/>"+
+
+                        "<h3>Symptoms</h3>" +
+                        "<p><b>Leaves:</b></p>" +
+                        "<p>⦁ <i>Early signs: small, irregularly shaped, water-soaked spots from light green to dark green appear on the upper side of leaves.</i><br/>" +
+                        "⦁ <i>Disease progression: spots rapidly enlarge, becoming brown-black or purplish-black, with a chlorotic (yellowish) zone forming around them.</i><br/>" +
+                        "⦁ <i>Late stage: a white, fuzzy coating—pathogen sporulation (Phytophthora infestans)—appears on the underside of leaves along the edges of affected areas.</i></p>" +
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_late_blight' width='500' height='200' /><br/>" +
+                        "<img src='fungal_phytophthora' width='500' height='200' /><br/>" +
+                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Stems and Petioles:</b></p>" +
+                        "<p>⦁ <i>Elongated, dark brown or black necrotic lesions form.</i><br/>" +
+                        "⦁ <i>Under high humidity, sporulation may occur on the surface of affected tissues.</i><br/>" +
+                        "⦁ <i>Affected tissues become brittle, leading to plant lodging.</i></p>" +
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_phytophthora_infestans_root' width='500' height='200' /><br/>" +
+                        "<img src='fungal_late_blight_3' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Fruits:</b></p>" +
+                        "<p><i>⦁ Infection usually begins at the top of the fruit.<br/>" +
+                        "⦁ Brown, hard spots, sometimes with a gray-green tint, form on the surface.<br/>" +
+                        "⦁ Tissues remain firm but may later develop secondary infections and rot.</i></p>" +
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_tomato' width='500' height='200' /><br/>" +
+                        "<img src='fungal_late_blight_2' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<h3>Epidemiology and Life Cycle</h3>" +
+                        "<p><b>Sources of Infection:</b><br/>"+
+                        "⦁ Crop residues of tomato, potato, and other solanaceous plants;<br/>" +
+                        "⦁ Infected seed tubers (in potatoes);<br/>" +
+                        "⦁ Weeds from the solanaceous family (e.g., black nightshade);<br/>" +
+                        "⦁ Adjacent plantings of infected crops.</p><br/>" +
+
+                        "<p><b>Development and Spread:</b><br/><br/>" +
+                        "⦁ Primary infection occurs when spores contact wet leaves or stems.<br/>" +
+                        "⦁ Under high humidity, sporulation forms on affected tissues. Spores spread via wind, raindrops, insects, and mechanically (through humans, equipment, or animals).<br/>" +
+                        "⦁ The infection spreads rapidly: new foci can appear within 2–3 days after initial infection.</p>" +
+
+                        "<h4><b>Climatic Conditions Favoring Development:</b></h4>" +
+                        "<p>⦁ Optimal temperature: 10–25 °C (with most active development at 15–20 °C).<br/>" +
+                        "⦁ Air humidity above 75–80% or prolonged moisture retention on leaves (dew, fog, rain).<br/>" +
+                        "⦁ Sharp fluctuations between day and night temperatures.<br/>" +
+                        "⦁ Overhead irrigation and dense plantings that hinder ventilation.</p>" +
+
+                        "<h4>Epidemiological Features:</h4>" +
+                        "<p>⦁ In open fields, it develops in foci, but in greenhouses, it can become epidemic.<br/>" +
+                        "⦁ Under favorable conditions, the disease can destroy a tomato crop in 7–10 days.</p>" +
+                        "<h3>Control and Prevention Measures</h3>" +
+                        "<h5>Agronomic Measures:</h5>" +
+                        "<p>⦁ Crop rotation: return solanaceous crops to the same field no earlier than 3–4 years.<br/>" +
+                        "⦁ Complete removal and destruction of crop residues after harvest.<br/>" +
+                        "⦁ Use of healthy planting material (certified plants and tubers).<br/>" +
+                        "⦁ Ensuring good ventilation in greenhouses and avoiding dense plantings.<br/>" +
+                        "⦁ Preferential root irrigation, avoiding overhead watering.<br/>" +
+                        "⦁ Maintaining an optimal microclimate (reducing humidity, improving air circulation).</p>" +
+
+                        "<h3>Biological Methods:</h3>" +
+                        "<p>⦁ Use of microbiological preparations based on fungi and bacteria for preventive treatments (Trichoderma spp., Bacillus subtilis), which suppress pathogen development.</p>" +
+                        "<h4>Chemical Methods:</h4>" +
+                        "<p>⦁ Contact fungicides: copper-based preparations (Bordeaux mixture, copper oxychloride, copper hydroxide).<br/>" +
+                        "⦁ Systemic fungicides: active ingredients—metalaxyl, mandipropamid, cymoxanil, cyazofamid, etc.<br/>" +
+                        "⦁ Application of preparations strictly according to regulations, considering waiting periods and rotating active ingredients to prevent resistance.</p>" +
+
+                        "<h4>Integrated Plant Protection:</h4>" +
+                        "<p>⦁ Combination of agronomic, biological, and chemical methods.<br/>" +
+                        "⦁ Regular phytosanitary monitoring of crops.<br/>" +
+                        "⦁ Use of predictive models (considering temperature, humidity, and precipitation) to determine treatment timings.<br/>" +
+                        "⦁ Minimizing chemical use through preventive and biological methods.</p>";
+            } else if(currentLanguage.equals("ru")) {
+                htmlText = "<h2><font color=\"#2E7D32\"><b>Бактериальный рак томата (Bacterial canker of tomato)</b></font></h2><br/>\n" +
+                        "<h3>Возбудитель</h3>" +
+                        "<p>Clavibacter michiganensis subsp. Michiganensis (Cmm)" +
+                        "Грамположительная бактерия, принадлежащая к классу Actinobacteria. Патоген образует" +
+                        "клеточные цепочки, выделяет экзополисахариды, ферменты и токсины, которые" +
+                        "разрушают ткани растения, способствуя развитию некрозов и увядания. Cmm способен" +
+                        "проникать в сосудистую систему растения через раны на корнях, стеблях или после" +
+                        "механических повреждений, что обеспечивает системное распространение инфекции.</p><br/>"+
+                        "<img src='bacterial_picture1'/><br/>" +
+
+                        "<h3>Симптомы</h3>" +
+                        "<p><b>Листья:</b></p>" +
+                        "<p>⦁ Часто наблюдается одностороннее увядание верхушечных листьев. При этом одна сторона листа увядает, в то время как другая сохраняет тургор, что приводит к искривлению листовой пластины<br/>" +
+
+                        "⦁ Пузыревидные или волдыреподобные пятна на листьях. Данный симптом появляется при вторичном заражении в питомниках томатов.<br/>" +
+                        "⦁ При локальном инфицировании общее пожелтение листьев, особенно старых.</p>" +
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='bacterial_picture2' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture3' width='500' height='200' /><br/>" +
+//                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Стебли и черешки:</b></p>" +
+                        "<p>⦁ <i>При системном инфицировании происходит постепенное потемнение проводящих тканей ксилемы. При этом Cmm, проникая через естественные отверстия или раны, размножается в ксилеме и способствует закупориванию сосудов, тем самым вызывая увядание растений. Начальные признаки увядания растений томата, обычно появляются в средней части растений, а потом распространяются вверх и вниз по стеблю, вызывая увядание и гибель растения.</i><br/>" +
+                        "⦁ <i>Образование язв на стебле с коричневыми и полыми сосудистыми пучками на\n" +
+                        "поздних стадиях инфекции.</i><br/>" +
+
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='bacterial_picture4' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture5' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture6' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture7' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Плоды:</b></p>" +
+                        "<p>⦁ Птичий глаз; на плодах- некротические пятна диаметром 1–3 мм на эпидермисе плодов. Цвет пятен варьируется от белого (у незрелых плодов томата) до темно-бурого (у зрелых).<br/>" +
+                        "⦁ Инфицированные плоды могут иметь сетчатую или мраморную текстуру.</p>" +
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='bacterial_picture8' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture9' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture10' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<h3>Эпидемиология и жизненный цикл</h3>" +
+                        "<p><b>Источники инфекции:</b><br/>"+
+                        "⦁ Заражённые семена томата;<br/>" +
+                        "⦁ больные растения в теплицах и открытых посевах;<br/>" +
+                        "⦁ механические повреждения и инструменты, заражённые патогеном,;<br/>" +
+
+                        "<p><b>Развитие и распространение:</b><br/><br/>" +
+                        "⦁ Бактерия проникает через раны или повреждения, устьица и быстро распространяется по сосудистой системе,<br/>" +
+                        "⦁ в закрытом грунте патогены могут сохраняются в течение многих лет, вызывая вспышки заболеваний почти в каждом обороте,<br/>" +
+                        "⦁ распространяется механически, через полив, семена и инструменты.</p>" +
+
+                        "<h4><b>Климатические условия, способствующие развитию:</b></h4>" +
+                        "<p>⦁ Оптимальная температура: 10–25 °C (с наиболее активным развитием при 15–20 °C).<br/>" +
+                        "⦁ механические повреждения растений и загущённые посадки повышают риск распространения инфекции.<br/></p>" +
+
+                        "<h4>Особенности эпидемиологии:</h4>" +
+                        "<p>⦁ Оптимальная температура: 20–26 °C,<br/>" +
+                        "⦁ В теплицах болезнь может быстро распространяться и поражать все растения,</p>" +
+                        "⦁ на открытых посевах развитие очаговое, но при благоприятных условиях\n" +
+                        "наблюдается сильное увядание и гибель растений."+
+
+                        "<h3>Меры борьбы и профилактика</h3>" +
+                        "<h5>Агротехнические меры:</h5>" +
+                        "<p>⦁ Использование сертифицированных, здоровых семян и саженцев,<br/>" +
+                        "⦁ уничтожение растительных остатков после уборки урожая,<br/>" +
+                        "⦁ соблюдение севооборота: возврат томата на прежнее место не ранее чем через 3–4 года," +
+                        "⦁ обработка инструментов и оборудования дезинфицирующими средствами,<br/>" +
+                        "⦁ поддержание оптимального микроклимата: хорошая вентиляция, избегание загущённых посадок.</p>" +
+
+                        "<h3>Биологические методы:</h3>" +
+                        "<p>Применение биофунгицидов, таких как Фитолавин (биофунгицид на основефитобактериомицина, природного антибиотика, получаемого из актиномицета Streptomyces griseus), для профилактики бактериальных заболеваний томата, включая бактериальный рак. Эффективность против Cmm ограничена и чаще служит вспомогательной мерой в комплексе с агротехническими приёмами.</p>" +
+
+                        "<h4>Химические методы:</h4>" +
+                        "<p>⦁ Использование медьсодержащих препаратов (медный оксихлорид, бордосская смесь) и биофунгицидов в профилактических целях.<br/>" +
+                        "⦁ Антибактериальные средства (стрептомицин, касугамицин, тетрациклин) применяются только при высокой угрозе заражения и с учётом действующих норм по безопасности.</p>" +
+
+                        "<h4>Интегрированная защита растений:</h4>" +
+                        "<p>⦁ Сочетание агротехнических, биологических и химических приёмов.<br/>" +
+                        "⦁ Регулярный фитосанитарный мониторинг растений.<br/>" +
+                        "⦁ Своевременная локализация и удаление поражённых растений для предотвращения распространения.<br/>";
+            }
+            else if(currentLanguage.equals("hy")){
+                htmlText = "<h2><font color=\"#2E7D32\"><b>Ֆիտոֆտորոզ (Late blight)</b></font></h2><br/>\n" +
+                        "<h3>Հիվանդության հարուցիչը</h3>" +
+                        "<img src='fungal_reino_protista'/><br/>" +
+                        "<p style='font-size: 20px; font-weight: 900; text-align: center;'><i>Phytophthora infestans</i> (օօմիցետ)</p>" +
+                        "<h3>Տեր (վարակի ենթակա) բույսերը</h3>" +
+                        "<p>Լոլիկ, տաքդեղ, սմբուկ, կարտոֆիլ և այլ մորմազգի (Solanaceae) ընտանիքի ներկայացուցիչներ։</p><br/>" +
+                        "<h3>Ախտանիշները</h3>" +
+                        "<p><b>Տերևների վրա</b></p>" +
+                        "⦁ <i>Վաղ փուլում․</i> <span>տերևների վերին մակերեսին առաջանում են փոքր, անկանոն ձևի, ջրիկ բծեր՝ բաց կանաչից մինչև մուգ կանաչ երանգներով։<br/>" +
+                        "⦁ <i>Հիվանդության զարգացման փուլում․</i> բծերը արագ ընդարձակվում են, դառնում են շագանակագույն կամ մանուշակագույն-սև, իսկ դրանց շուրջ ձևավորվում է դեղնավուն (քլորոտիկ) գոտի։<br/>" +
+                        "⦁ <i>Վերջնական փուլում․</i> տերևների ստորին մակերեսի ախտահարված հատվածների եզրերին հայտնվում է սպիտակ, փափուկ փառ՝ կազմված պաթոգենի սպորներից։</span>" +
+                        "<div style='display:flex; justify-content:center;'>" +
+                        "<img src='fungal_late_blight' width='500' height='200'/><br/>" +
+                        "<img src='fungal_phytophthora' width='500' height='200'/><br/>" +
+                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200'/><br/>" +
+                        "</div>" +
+                        "<p><b>Ցողունների և տերևակոթունների վրա</b></p>" +
+                        "<p>⦁ Առաջանում են երկարավուն, մուգ շագանակագույն կամ սև նեկրոտիկ ախտահարված հատվածներ։<br/>" +
+                        "⦁ Բարձր խոնավության պայմաններում ախտահարված հյուսվածքների մակերեսին կարող է ձևավորվել պաթոգենի սպորները։<br/>" +
+                        "⦁ Ախտահարված հատվածներում հյուսվածքները դառնում են փխրուն, ինչի հետևանքով բույսերը թուլանում և ծռվում են։</p>" +
+                        "<div style='display:flex; justify-content:center;'>" +
+                        "<img src='fungal_phytophthora_infestans_root' width='500' height='200'/><br/>" +
+                        "<img src='fungal_late_blight_3' width='500' height='200'/><br/>" +
+                        "</div>" +
+                        "<p><b>Պտուղների վրա</b></p>" +
+                        "<p>⦁ Ախտահարումը սովորաբար սկսվում է պտղի վերին մասից։<br/>" +
+                        "⦁ Մակերեսին ձևավորվում են շագանակագույն, երբեմն մոխրագունավուն-կանաչավուն երանգով կարծր բծեր։<br/>" +
+                        "⦁ Պտուղների հյուսվածքները ժամանակի ընթացքում ենթարկվում են երկրորդային վարակման և փտում։</p>" +
+                        "<div style='display:flex; justify-content:center;'>" +
+                        "<img src='fungal_tomato' width='500' height='200'/><br/>" +
+                        "<img src='fungal_late_blight_2' width='500' height='200'/><br/>" +
+                        "</div>" +
+                        "<h3>Էպիդեմիոլոգիա և զարգացման ցիկլ</h3>" +
+                        "<p><b>Վարակի աղբյուրները:</b><br/>" +
+                        "⦁ լոլիկի, կարտոֆիլի և այլ մորմազգի մշակաբույսերի մնացորդներ,<br/>" +
+                        "⦁ վարակված սերմային կարտոֆիլի պալարներ,<br/>" +
+                        "⦁ մորմազգի ընտանիքին պատկանող մոլախոտեր (օր.՝ սև փասլեն, Solanum nigrum),<br/>" +
+                        "⦁ հարևան տարածքներում աճող վարակված մշակաբույսեր։</p><br/>" +
+                        "<p><b>Զարգացում և տարածում</b><br/><br/>" +
+                        "⦁ Նախնական վարակումը տեղի է ունենում, երբ սպորները շփվում են խոնավ տերևների կամ ցողունների հետ։<br/>" +
+                        "⦁ Բարձր խոնավության պայմաններում ախտահարված հյուսվածքների վրա զարգանում են սպորները, որոնք տարածվում են քամու, անձրևի կաթիլների, միջատների կամ մարդկանց, գործիքների և կենդանիների միջոցով։<br/>" +
+                        "⦁ Վարակը շատ արագ է տարածվում․ նոր օջախներ կարող են առաջանալ վարակումից ընդամենը 2–3 օր անց։</p>" +
+                        "<h4><b>Կլիմայական պայմաններ, որոնք նպաստում են հիվանդության զարգացմանը</b></h4>" +
+                        "<p>⦁ Օպտիմալ ջերմաստիճան․ 10–25 °C (ակտիվ զարգացում՝ 15–20 °C),<br/>" +
+                        "⦁ Օդի խոնավություն․ 75–80% բարձր կամ տերևների վրա երկարատև խոնավության պահպանություն (ցող, մառախուղ, անձրև),<br/>" +
+                        "⦁ Օրվա և գիշերվա ջերմաստիճանի կտրուկ տատանումներ,<br/>" +
+                        "⦁ Անձրևային ոռոգում և տնկման խտությունը, որոնք խոչընդոտում են օդափոխությունը։</p>" +
+                        "<h4>Էպիդեմիոլոգիական առանձնահատկություններ</h4>" +
+                        "<p>⦁ Բաց դաշտի պայմաններում հիվանդությունը զարգանում է օջախային ձևով, մինչդեռ ջերմատներում կարող է ստանալ էպիֆիտոտիկ բնույթ։<br/>" +
+                        "⦁ Բարենպաստ պայմաններում հիվանդությունը կարող է ոչնչացնել լոլիկի բերքը 7–10 օրվա ընթացքում։</p>" +
+                        "<h3>Պայքարի և կանխարգելման միջոցառումներ</h3>" +
+                        "<h5>Ագրոտեխնիկական միջոցառումներ</h5>" +
+                        "<p>⦁ Պահպանել ցանքաշրջանառությունը․ մորմազգի մշակաբույսերը նույն տեղը վերադարձնել ոչ շուտ, քան 3–4 տարի անց։<br/>" +
+                        "⦁ Բերքահավաքից հետո ամբողջությամբ հեռացնել և ոչնչացնել բույսերի մնացորդները։<br/>" +
+                        "⦁ Օգտագործել առողջ տնկանյութ (սերտիֆիկացված բույսեր և պալարներ)։<br/>" +
+                        "⦁ Ապահովել լավ օդափոխություն ջերմատներում՝ խուսափելով խտացված տնկումներից։<br/>" +
+                        "⦁ Ոռոգումը կատարել հիմնականում արմատային եղանակով՝ խուսափելով անձրևային ոռոգումից։<br/>" +
+                        "⦁ Պահպանել օպտիմալ միկրոկլիմա՝ նվազեցնելով խոնավությունը և բարելավելով օդի շրջանառությունը։</p>" +
+                        "<h3>Կենսաբանական մեթոդներ</h3>" +
+                        "<p>⦁ Օգտագործել միկրոբիոլոգիական պատրաստուկներ՝ Trichoderma spp., Bacillus subtilis, որոնք կանխում են պաթոգենի զարգացումը։</p>" +
+                        "<h4>Քիմիական մեթոդներ</h4>" +
+                        "<p>⦁ Կոնտակտային ֆունգիցիդներ․ պղնձային պատրաստուկներ (Բորդոյի հեղուկ, պղնձի քլորօքսիդ, պղնձի հիդրօքսիդ)։<br/>" +
+                        "⦁ Սիստեմային ֆունգիցիդներ․ ակտիվ նյութեր՝ մետալաքսիլ, մանդիպրոպամիդ, ցիմօքսանիլ, ցիազոֆամիդ և այլն։<br/>" +
+                        "⦁ Պատրաստուկները կիրառել խիստ ըստ կանոնակարգի՝ պահպանելով սպասման ժամկետներն ու նյութերի ռոտացիան՝ դիմադրություն չձևավորելու նպատակով։</p>" +
+                        "<h4>Ինտեգրված բույսերի պաշտպանություն</h4>" +
+                        "<p>⦁ Համակցել ագրոտեխնիկական, կենսաբանական և քիմիական միջոցառումները։<br/>" +
+                        "⦁ Կատարել պարբերական ֆիտոսանիտար մոնիտորինգ։<br/>" +
+                        "⦁ Օգտագործել կանխատեսման մոդելներ՝ հիմք ընդունելով ջերմաստիճանը, խոնավությունը և տեղումները՝ մշակաբույսերի մշակման ժամկետները որոշելու համար։<br/>" +
+                        "⦁ Քիմիական միջոցների կիրառումը նվազեցնել՝ առավելություն տալով կանխարգելիչ և կենսաբանական մեթոդներին։</p>";
+
+            }
+
+            // Устанавливаем HTML текст
+            textInfo.setText(HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY, new Html.ImageGetter() {
+                @Override
+                public Drawable getDrawable(String source) {
+                    int resId = getResources().getIdentifier(source, "drawable", getPackageName());
+                    if (resId == 0) {
+                        Log.w("MENU_ACTIVITY", "Image resource not found: " + source);
+                        Drawable placeholder = getResources().getDrawable(android.R.drawable.ic_menu_gallery);
+                        placeholder.setBounds(0, 0, 300, 200);
+                        return placeholder;
+                    }
+
+                    Drawable drawable = getResources().getDrawable(resId);
+
+                    if (source.equals("fungal_reino_protista")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+                    else if (source.equals("fungal_phytophthora") || source.equals("fungal_phytophthora_infestans_late") || source.equals("fungal_late_blight")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+                    else if (source.equals("fungal_phytophthora_infestans_root") || source.equals("fungal_late_blight_3")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+
+                    }
+                    else if (source.equals("fungal_tomato") || source.equals("fungal_late_blight_2")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+                    else if (source.equals("fungal_phytophthora_infestans")) {
+                        drawable.setBounds( 700, 0, 700, 700);
+                    } else {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+
+                    return drawable;
+                }
+            }, null));
+        }
+
+        if (category.equals("Viral")) {
+            if (currentLanguage.equals("en")) {
+                htmlText = "<h2><font color=\"#2E7D32\"><b>Late Blight</b></font></h2><br/>\n" +
+                        "<h3>Pathogen</h3>" +
+                        "<img src='fungal_reino_protista'/><br/>" +
+                        "<p style='font-size: 20px; font-weight: 900; text-align: center;'><i>Phytophthora infestans</i> (oomycete)</p>" +
+                        "<h3>Host Range</h3>"+
+                        "<p>Tomato, pepper, eggplant, potato, and other solanaceous crops.</p><br/>"+
+
+                        "<h3>Symptoms</h3>" +
+                        "<p><b>Leaves:</b></p>" +
+                        "<p>⦁ <i>Early signs: small, irregularly shaped, water-soaked spots from light green to dark green appear on the upper side of leaves.</i><br/>" +
+                        "⦁ <i>Disease progression: spots rapidly enlarge, becoming brown-black or purplish-black, with a chlorotic (yellowish) zone forming around them.</i><br/>" +
+                        "⦁ <i>Late stage: a white, fuzzy coating—pathogen sporulation (Phytophthora infestans)—appears on the underside of leaves along the edges of affected areas.</i></p>" +
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_late_blight' width='500' height='200' /><br/>" +
+                        "<img src='fungal_phytophthora' width='500' height='200' /><br/>" +
+                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Stems and Petioles:</b></p>" +
+                        "<p>⦁ <i>Elongated, dark brown or black necrotic lesions form.</i><br/>" +
+                        "⦁ <i>Under high humidity, sporulation may occur on the surface of affected tissues.</i><br/>" +
+                        "⦁ <i>Affected tissues become brittle, leading to plant lodging.</i></p>" +
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_phytophthora_infestans_root' width='500' height='200' /><br/>" +
+                        "<img src='fungal_late_blight_3' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Fruits:</b></p>" +
+                        "<p><i>⦁ Infection usually begins at the top of the fruit.<br/>" +
+                        "⦁ Brown, hard spots, sometimes with a gray-green tint, form on the surface.<br/>" +
+                        "⦁ Tissues remain firm but may later develop secondary infections and rot.</i></p>" +
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='fungal_tomato' width='500' height='200' /><br/>" +
+                        "<img src='fungal_late_blight_2' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<h3>Epidemiology and Life Cycle</h3>" +
+                        "<p><b>Sources of Infection:</b><br/>"+
+                        "⦁ Crop residues of tomato, potato, and other solanaceous plants;<br/>" +
+                        "⦁ Infected seed tubers (in potatoes);<br/>" +
+                        "⦁ Weeds from the solanaceous family (e.g., black nightshade);<br/>" +
+                        "⦁ Adjacent plantings of infected crops.</p><br/>" +
+
+                        "<p><b>Development and Spread:</b><br/><br/>" +
+                        "⦁ Primary infection occurs when spores contact wet leaves or stems.<br/>" +
+                        "⦁ Under high humidity, sporulation forms on affected tissues. Spores spread via wind, raindrops, insects, and mechanically (through humans, equipment, or animals).<br/>" +
+                        "⦁ The infection spreads rapidly: new foci can appear within 2–3 days after initial infection.</p>" +
+
+                        "<h4><b>Climatic Conditions Favoring Development:</b></h4>" +
+                        "<p>⦁ Optimal temperature: 10–25 °C (with most active development at 15–20 °C).<br/>" +
+                        "⦁ Air humidity above 75–80% or prolonged moisture retention on leaves (dew, fog, rain).<br/>" +
+                        "⦁ Sharp fluctuations between day and night temperatures.<br/>" +
+                        "⦁ Overhead irrigation and dense plantings that hinder ventilation.</p>" +
+
+                        "<h4>Epidemiological Features:</h4>" +
+                        "<p>⦁ In open fields, it develops in foci, but in greenhouses, it can become epidemic.<br/>" +
+                        "⦁ Under favorable conditions, the disease can destroy a tomato crop in 7–10 days.</p>" +
+                        "<h3>Control and Prevention Measures</h3>" +
+                        "<h5>Agronomic Measures:</h5>" +
+                        "<p>⦁ Crop rotation: return solanaceous crops to the same field no earlier than 3–4 years.<br/>" +
+                        "⦁ Complete removal and destruction of crop residues after harvest.<br/>" +
+                        "⦁ Use of healthy planting material (certified plants and tubers).<br/>" +
+                        "⦁ Ensuring good ventilation in greenhouses and avoiding dense plantings.<br/>" +
+                        "⦁ Preferential root irrigation, avoiding overhead watering.<br/>" +
+                        "⦁ Maintaining an optimal microclimate (reducing humidity, improving air circulation).</p>" +
+
+                        "<h3>Biological Methods:</h3>" +
+                        "<p>⦁ Use of microbiological preparations based on fungi and bacteria for preventive treatments (Trichoderma spp., Bacillus subtilis), which suppress pathogen development.</p>" +
+                        "<h4>Chemical Methods:</h4>" +
+                        "<p>⦁ Contact fungicides: copper-based preparations (Bordeaux mixture, copper oxychloride, copper hydroxide).<br/>" +
+                        "⦁ Systemic fungicides: active ingredients—metalaxyl, mandipropamid, cymoxanil, cyazofamid, etc.<br/>" +
+                        "⦁ Application of preparations strictly according to regulations, considering waiting periods and rotating active ingredients to prevent resistance.</p>" +
+
+                        "<h4>Integrated Plant Protection:</h4>" +
+                        "<p>⦁ Combination of agronomic, biological, and chemical methods.<br/>" +
+                        "⦁ Regular phytosanitary monitoring of crops.<br/>" +
+                        "⦁ Use of predictive models (considering temperature, humidity, and precipitation) to determine treatment timings.<br/>" +
+                        "⦁ Minimizing chemical use through preventive and biological methods.</p>";
+            } else if(currentLanguage.equals("ru")) {
+                htmlText = "<h2><font color=\"#2E7D32\"><b>Бактериальный рак томата (Bacterial canker of tomato)</b></font></h2><br/>\n" +
+                        "<h3>Возбудитель</h3>" +
+                        "<p>Clavibacter michiganensis subsp. Michiganensis (Cmm)" +
+                        "Грамположительная бактерия, принадлежащая к классу Actinobacteria. Патоген образует" +
+                        "клеточные цепочки, выделяет экзополисахариды, ферменты и токсины, которые" +
+                        "разрушают ткани растения, способствуя развитию некрозов и увядания. Cmm способен" +
+                        "проникать в сосудистую систему растения через раны на корнях, стеблях или после" +
+                        "механических повреждений, что обеспечивает системное распространение инфекции.</p><br/>"+
+                        "<img src='bacterial_picture1'/><br/>" +
+
+                        "<h3>Симптомы</h3>" +
+                        "<p><b>Листья:</b></p>" +
+                        "<p>⦁ Часто наблюдается одностороннее увядание верхушечных листьев. При этом одна сторона листа увядает, в то время как другая сохраняет тургор, что приводит к искривлению листовой пластины<br/>" +
+
+                        "⦁ Пузыревидные или волдыреподобные пятна на листьях. Данный симптом появляется при вторичном заражении в питомниках томатов.<br/>" +
+                        "⦁ При локальном инфицировании общее пожелтение листьев, особенно старых.</p>" +
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='bacterial_picture2' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture3' width='500' height='200' /><br/>" +
+//                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Стебли и черешки:</b></p>" +
+                        "<p>⦁ <i>При системном инфицировании происходит постепенное потемнение проводящих тканей ксилемы. При этом Cmm, проникая через естественные отверстия или раны, размножается в ксилеме и способствует закупориванию сосудов, тем самым вызывая увядание растений. Начальные признаки увядания растений томата, обычно появляются в средней части растений, а потом распространяются вверх и вниз по стеблю, вызывая увядание и гибель растения.</i><br/>" +
+                        "⦁ <i>Образование язв на стебле с коричневыми и полыми сосудистыми пучками на\n" +
+                        "поздних стадиях инфекции.</i><br/>" +
+
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='bacterial_picture4' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture5' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture6' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture7' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<p><b>Плоды:</b></p>" +
+                        "<p>⦁ Птичий глаз; на плодах- некротические пятна диаметром 1–3 мм на эпидермисе плодов. Цвет пятен варьируется от белого (у незрелых плодов томата) до темно-бурого (у зрелых).<br/>" +
+                        "⦁ Инфицированные плоды могут иметь сетчатую или мраморную текстуру.</p>" +
+
+                        "<div style = 'display:flex; justify-content: center;'>" +
+                        "<img src='bacterial_picture8' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture9' width='500' height='200' /><br/>" +
+                        "<img src='bacterial_picture10' width='500' height='200' /><br/>" +
+                        "</div>" +
+
+                        "<h3>Эпидемиология и жизненный цикл</h3>" +
+                        "<p><b>Источники инфекции:</b><br/>"+
+                        "⦁ Заражённые семена томата;<br/>" +
+                        "⦁ больные растения в теплицах и открытых посевах;<br/>" +
+                        "⦁ механические повреждения и инструменты, заражённые патогеном,;<br/>" +
+
+                        "<p><b>Развитие и распространение:</b><br/><br/>" +
+                        "⦁ Бактерия проникает через раны или повреждения, устьица и быстро распространяется по сосудистой системе,<br/>" +
+                        "⦁ в закрытом грунте патогены могут сохраняются в течение многих лет, вызывая вспышки заболеваний почти в каждом обороте,<br/>" +
+                        "⦁ распространяется механически, через полив, семена и инструменты.</p>" +
+
+                        "<h4><b>Климатические условия, способствующие развитию:</b></h4>" +
+                        "<p>⦁ Оптимальная температура: 10–25 °C (с наиболее активным развитием при 15–20 °C).<br/>" +
+                        "⦁ механические повреждения растений и загущённые посадки повышают риск распространения инфекции.<br/></p>" +
+
+                        "<h4>Особенности эпидемиологии:</h4>" +
+                        "<p>⦁ Оптимальная температура: 20–26 °C,<br/>" +
+                        "⦁ В теплицах болезнь может быстро распространяться и поражать все растения,</p>" +
+                        "⦁ на открытых посевах развитие очаговое, но при благоприятных условиях\n" +
+                        "наблюдается сильное увядание и гибель растений."+
+
+                        "<h3>Меры борьбы и профилактика</h3>" +
+                        "<h5>Агротехнические меры:</h5>" +
+                        "<p>⦁ Использование сертифицированных, здоровых семян и саженцев,<br/>" +
+                        "⦁ уничтожение растительных остатков после уборки урожая,<br/>" +
+                        "⦁ соблюдение севооборота: возврат томата на прежнее место не ранее чем через 3–4 года," +
+                        "⦁ обработка инструментов и оборудования дезинфицирующими средствами,<br/>" +
+                        "⦁ поддержание оптимального микроклимата: хорошая вентиляция, избегание загущённых посадок.</p>" +
+
+                        "<h3>Биологические методы:</h3>" +
+                        "<p>Применение биофунгицидов, таких как Фитолавин (биофунгицид на основефитобактериомицина, природного антибиотика, получаемого из актиномицета Streptomyces griseus), для профилактики бактериальных заболеваний томата, включая бактериальный рак. Эффективность против Cmm ограничена и чаще служит вспомогательной мерой в комплексе с агротехническими приёмами.</p>" +
+
+                        "<h4>Химические методы:</h4>" +
+                        "<p>⦁ Использование медьсодержащих препаратов (медный оксихлорид, бордосская смесь) и биофунгицидов в профилактических целях.<br/>" +
+                        "⦁ Антибактериальные средства (стрептомицин, касугамицин, тетрациклин) применяются только при высокой угрозе заражения и с учётом действующих норм по безопасности.</p>" +
+
+                        "<h4>Интегрированная защита растений:</h4>" +
+                        "<p>⦁ Сочетание агротехнических, биологических и химических приёмов.<br/>" +
+                        "⦁ Регулярный фитосанитарный мониторинг растений.<br/>" +
+                        "⦁ Своевременная локализация и удаление поражённых растений для предотвращения распространения.<br/>";
+            }
+            else if(currentLanguage.equals("hy")){
+                htmlText = "<h2><font color=\"#2E7D32\"><b>Ֆիտոֆտորոզ (Late blight)</b></font></h2><br/>\n" +
+                        "<h3>Հիվանդության հարուցիչը</h3>" +
+                        "<img src='fungal_reino_protista'/><br/>" +
+                        "<p style='font-size: 20px; font-weight: 900; text-align: center;'><i>Phytophthora infestans</i> (օօմիցետ)</p>" +
+                        "<h3>Տեր (վարակի ենթակա) բույսերը</h3>" +
+                        "<p>Լոլիկ, տաքդեղ, սմբուկ, կարտոֆիլ և այլ մորմազգի (Solanaceae) ընտանիքի ներկայացուցիչներ։</p><br/>" +
+                        "<h3>Ախտանիշները</h3>" +
+                        "<p><b>Տերևների վրա</b></p>" +
+                        "⦁ <i>Վաղ փուլում․</i> <span>տերևների վերին մակերեսին առաջանում են փոքր, անկանոն ձևի, ջրիկ բծեր՝ բաց կանաչից մինչև մուգ կանաչ երանգներով։<br/>" +
+                        "⦁ <i>Հիվանդության զարգացման փուլում․</i> բծերը արագ ընդարձակվում են, դառնում են շագանակագույն կամ մանուշակագույն-սև, իսկ դրանց շուրջ ձևավորվում է դեղնավուն (քլորոտիկ) գոտի։<br/>" +
+                        "⦁ <i>Վերջնական փուլում․</i> տերևների ստորին մակերեսի ախտահարված հատվածների եզրերին հայտնվում է սպիտակ, փափուկ փառ՝ կազմված պաթոգենի սպորներից։</span>" +
+                        "<div style='display:flex; justify-content:center;'>" +
+                        "<img src='fungal_late_blight' width='500' height='200'/><br/>" +
+                        "<img src='fungal_phytophthora' width='500' height='200'/><br/>" +
+                        "<img src='fungal_phytophthora_infestans_late' width='500' height='200'/><br/>" +
+                        "</div>" +
+                        "<p><b>Ցողունների և տերևակոթունների վրա</b></p>" +
+                        "<p>⦁ Առաջանում են երկարավուն, մուգ շագանակագույն կամ սև նեկրոտիկ ախտահարված հատվածներ։<br/>" +
+                        "⦁ Բարձր խոնավության պայմաններում ախտահարված հյուսվածքների մակերեսին կարող է ձևավորվել պաթոգենի սպորները։<br/>" +
+                        "⦁ Ախտահարված հատվածներում հյուսվածքները դառնում են փխրուն, ինչի հետևանքով բույսերը թուլանում և ծռվում են։</p>" +
+                        "<div style='display:flex; justify-content:center;'>" +
+                        "<img src='fungal_phytophthora_infestans_root' width='500' height='200'/><br/>" +
+                        "<img src='fungal_late_blight_3' width='500' height='200'/><br/>" +
+                        "</div>" +
+                        "<p><b>Պտուղների վրա</b></p>" +
+                        "<p>⦁ Ախտահարումը սովորաբար սկսվում է պտղի վերին մասից։<br/>" +
+                        "⦁ Մակերեսին ձևավորվում են շագանակագույն, երբեմն մոխրագունավուն-կանաչավուն երանգով կարծր բծեր։<br/>" +
+                        "⦁ Պտուղների հյուսվածքները ժամանակի ընթացքում ենթարկվում են երկրորդային վարակման և փտում։</p>" +
+                        "<div style='display:flex; justify-content:center;'>" +
+                        "<img src='fungal_tomato' width='500' height='200'/><br/>" +
+                        "<img src='fungal_late_blight_2' width='500' height='200'/><br/>" +
+                        "</div>" +
+                        "<h3>Էպիդեմիոլոգիա և զարգացման ցիկլ</h3>" +
+                        "<p><b>Վարակի աղբյուրները:</b><br/>" +
+                        "⦁ լոլիկի, կարտոֆիլի և այլ մորմազգի մշակաբույսերի մնացորդներ,<br/>" +
+                        "⦁ վարակված սերմային կարտոֆիլի պալարներ,<br/>" +
+                        "⦁ մորմազգի ընտանիքին պատկանող մոլախոտեր (օր.՝ սև փասլեն, Solanum nigrum),<br/>" +
+                        "⦁ հարևան տարածքներում աճող վարակված մշակաբույսեր։</p><br/>" +
+                        "<p><b>Զարգացում և տարածում</b><br/><br/>" +
+                        "⦁ Նախնական վարակումը տեղի է ունենում, երբ սպորները շփվում են խոնավ տերևների կամ ցողունների հետ։<br/>" +
+                        "⦁ Բարձր խոնավության պայմաններում ախտահարված հյուսվածքների վրա զարգանում են սպորները, որոնք տարածվում են քամու, անձրևի կաթիլների, միջատների կամ մարդկանց, գործիքների և կենդանիների միջոցով։<br/>" +
+                        "⦁ Վարակը շատ արագ է տարածվում․ նոր օջախներ կարող են առաջանալ վարակումից ընդամենը 2–3 օր անց։</p>" +
+                        "<h4><b>Կլիմայական պայմաններ, որոնք նպաստում են հիվանդության զարգացմանը</b></h4>" +
+                        "<p>⦁ Օպտիմալ ջերմաստիճան․ 10–25 °C (ակտիվ զարգացում՝ 15–20 °C),<br/>" +
+                        "⦁ Օդի խոնավություն․ 75–80% բարձր կամ տերևների վրա երկարատև խոնավության պահպանություն (ցող, մառախուղ, անձրև),<br/>" +
+                        "⦁ Օրվա և գիշերվա ջերմաստիճանի կտրուկ տատանումներ,<br/>" +
+                        "⦁ Անձրևային ոռոգում և տնկման խտությունը, որոնք խոչընդոտում են օդափոխությունը։</p>" +
+                        "<h4>Էպիդեմիոլոգիական առանձնահատկություններ</h4>" +
+                        "<p>⦁ Բաց դաշտի պայմաններում հիվանդությունը զարգանում է օջախային ձևով, մինչդեռ ջերմատներում կարող է ստանալ էպիֆիտոտիկ բնույթ։<br/>" +
+                        "⦁ Բարենպաստ պայմաններում հիվանդությունը կարող է ոչնչացնել լոլիկի բերքը 7–10 օրվա ընթացքում։</p>" +
+                        "<h3>Պայքարի և կանխարգելման միջոցառումներ</h3>" +
+                        "<h5>Ագրոտեխնիկական միջոցառումներ</h5>" +
+                        "<p>⦁ Պահպանել ցանքաշրջանառությունը․ մորմազգի մշակաբույսերը նույն տեղը վերադարձնել ոչ շուտ, քան 3–4 տարի անց։<br/>" +
+                        "⦁ Բերքահավաքից հետո ամբողջությամբ հեռացնել և ոչնչացնել բույսերի մնացորդները։<br/>" +
+                        "⦁ Օգտագործել առողջ տնկանյութ (սերտիֆիկացված բույսեր և պալարներ)։<br/>" +
+                        "⦁ Ապահովել լավ օդափոխություն ջերմատներում՝ խուսափելով խտացված տնկումներից։<br/>" +
+                        "⦁ Ոռոգումը կատարել հիմնականում արմատային եղանակով՝ խուսափելով անձրևային ոռոգումից։<br/>" +
+                        "⦁ Պահպանել օպտիմալ միկրոկլիմա՝ նվազեցնելով խոնավությունը և բարելավելով օդի շրջանառությունը։</p>" +
+                        "<h3>Կենսաբանական մեթոդներ</h3>" +
+                        "<p>⦁ Օգտագործել միկրոբիոլոգիական պատրաստուկներ՝ Trichoderma spp., Bacillus subtilis, որոնք կանխում են պաթոգենի զարգացումը։</p>" +
+                        "<h4>Քիմիական մեթոդներ</h4>" +
+                        "<p>⦁ Կոնտակտային ֆունգիցիդներ․ պղնձային պատրաստուկներ (Բորդոյի հեղուկ, պղնձի քլորօքսիդ, պղնձի հիդրօքսիդ)։<br/>" +
+                        "⦁ Սիստեմային ֆունգիցիդներ․ ակտիվ նյութեր՝ մետալաքսիլ, մանդիպրոպամիդ, ցիմօքսանիլ, ցիազոֆամիդ և այլն։<br/>" +
+                        "⦁ Պատրաստուկները կիրառել խիստ ըստ կանոնակարգի՝ պահպանելով սպասման ժամկետներն ու նյութերի ռոտացիան՝ դիմադրություն չձևավորելու նպատակով։</p>" +
+                        "<h4>Ինտեգրված բույսերի պաշտպանություն</h4>" +
+                        "<p>⦁ Համակցել ագրոտեխնիկական, կենսաբանական և քիմիական միջոցառումները։<br/>" +
+                        "⦁ Կատարել պարբերական ֆիտոսանիտար մոնիտորինգ։<br/>" +
+                        "⦁ Օգտագործել կանխատեսման մոդելներ՝ հիմք ընդունելով ջերմաստիճանը, խոնավությունը և տեղումները՝ մշակաբույսերի մշակման ժամկետները որոշելու համար։<br/>" +
+                        "⦁ Քիմիական միջոցների կիրառումը նվազեցնել՝ առավելություն տալով կանխարգելիչ և կենսաբանական մեթոդներին։</p>";
+
+            }
+
+            // Устанавливаем HTML текст
+            textInfo.setText(HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY, new Html.ImageGetter() {
+                @Override
+                public Drawable getDrawable(String source) {
+                    int resId = getResources().getIdentifier(source, "drawable", getPackageName());
+                    if (resId == 0) {
+                        Log.w("MENU_ACTIVITY", "Image resource not found: " + source);
+                        Drawable placeholder = getResources().getDrawable(android.R.drawable.ic_menu_gallery);
+                        placeholder.setBounds(0, 0, 300, 200);
+                        return placeholder;
+                    }
+
+                    Drawable drawable = getResources().getDrawable(resId);
+
+                    if (source.equals("fungal_reino_protista")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+                    else if (source.equals("fungal_phytophthora") || source.equals("fungal_phytophthora_infestans_late") || source.equals("fungal_late_blight")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+                    else if (source.equals("fungal_phytophthora_infestans_root") || source.equals("fungal_late_blight_3")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+
+                    }
+                    else if (source.equals("fungal_tomato") || source.equals("fungal_late_blight_2")) {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+                    else if (source.equals("fungal_phytophthora_infestans")) {
+                        drawable.setBounds( 700, 0, 700, 700);
+                    } else {
+                        int originalWidth = drawable.getIntrinsicWidth();
+                        int originalHeight = drawable.getIntrinsicHeight();
+
+                        int maxWidth = 1000;
+                        int newHeight = (originalHeight * maxWidth) / originalWidth;
+
+                        int left = (screenWidth - maxWidth) / 2;
+                        int right = (screenWidth + maxWidth) / 2;
+
+                        drawable.setBounds(left, 0, right, newHeight);
+                    }
+
+                    return drawable;
+                }
+            }, null));
         }
     }
 

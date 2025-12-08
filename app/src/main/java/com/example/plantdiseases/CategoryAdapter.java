@@ -20,10 +20,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<String> categories;
     private Context context;
     private OnCategoryClickListener clickListener;
-    private String currentLanguage = "ru"; // язык по умолчанию
-
-    // Словарь для перевода названий категорий
+    private String currentLanguage = "ru";
     private Map<String, Map<String, String>> categoryTranslations;
+    private Map<String, Integer> categoryImages; // Store image resource IDs
 
     public interface OnCategoryClickListener {
         void onCategoryClick(String category);
@@ -33,32 +32,32 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         this.categories = categories;
         this.clickListener = clickListener;
         initializeTranslations();
+        initializeImages();
     }
 
-    // Метод для установки текущего языка
     public void setLanguage(String language) {
         this.currentLanguage = language;
-        notifyDataSetChanged(); // Обновляем все элементы при изменении языка
+        notifyDataSetChanged();
     }
 
     private void initializeTranslations() {
         categoryTranslations = new HashMap<>();
 
-        // Перевод для "Fungal"
+        // Fungal
         Map<String, String> fungalTranslations = new HashMap<>();
         fungalTranslations.put("ru", "Грибковые");
         fungalTranslations.put("en", "Fungal");
         fungalTranslations.put("hy", "Սնկային");
         categoryTranslations.put("Fungal", fungalTranslations);
 
-        // Перевод для "Bacterial"
+        // Bacterial
         Map<String, String> bacterialTranslations = new HashMap<>();
         bacterialTranslations.put("ru", "Бактериальные");
         bacterialTranslations.put("en", "Bacterial");
         bacterialTranslations.put("hy", "Բակտերիալ");
         categoryTranslations.put("Bacterial", bacterialTranslations);
 
-        // Перевод для "Viral"
+        // Viral
         Map<String, String> viralTranslations = new HashMap<>();
         viralTranslations.put("ru", "Вирусные");
         viralTranslations.put("en", "Viral");
@@ -66,7 +65,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         categoryTranslations.put("Viral", viralTranslations);
     }
 
-    // Метод для получения переведенного названия категории
+    private void initializeImages() {
+        categoryImages = new HashMap<>();
+        categoryImages.put("Fungal", R.drawable.fungal_late_blight);
+        categoryImages.put("Bacterial", R.drawable.bacterial_picture9);
+        categoryImages.put("Viral", R.drawable.fungal_late_blight);
+    }
+
     private String getTranslatedCategory(String category) {
         if (categoryTranslations.containsKey(category)) {
             Map<String, String> translations = categoryTranslations.get(category);
@@ -74,8 +79,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 return translations.get(currentLanguage);
             }
         }
-        // Если перевод не найден, возвращаем оригинальное название
         return category;
+    }
+
+    private int getCategoryImage(String category) {
+        return categoryImages.getOrDefault(category, R.drawable.fungal_late_blight);
     }
 
     @NonNull
@@ -90,13 +98,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         String category = categories.get(position);
         String translatedCategory = getTranslatedCategory(category);
+        int imageResId = getCategoryImage(category);
 
         holder.categoryTextView.setText(translatedCategory);
+        holder.categoryImageButton.setImageResource(imageResId);
 
-        // Pass click to MenuActivity
-        holder.categoryImageButton.setOnClickListener(v -> clickListener.onCategoryClick(category));
-
-        // Также делаем кликабельным весь элемент, если нужно
+        // Set click listener on itemView only to avoid redundancy
         holder.itemView.setOnClickListener(v -> clickListener.onCategoryClick(category));
     }
 
