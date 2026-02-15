@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/account_edit_bg">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Main Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <!-- Заголовок в стиле category_item -->
+                    <LinearLayout
+                        android:id = "@+id/AboutAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Информация об аккаунте"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32" />
+
+                    </LinearLayout>
+
+                    <!-- Блок имени пользователя в стиле category_item -->
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutName"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Имя пользователя:"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/accountName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Имя пользователя"
+                            android:textColor="#2E7D32"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <!-- Блок email в стиле category_item -->
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Email:"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/accountEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="user@example.com"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                    <!-- Блок Tell в стиле category_item -->
+                    <LinearLayout
+                        android:id="@+id/LinearLayoutTell"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"
+                        android:background="@drawable/rounded_bg"
+                        android:layout_margin="10dp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Tell:"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/accountTell"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="----"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emailEditPopup"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_acc"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="Изменение Email"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:hint="Введите новый email"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/saveEmailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Сохранить"
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/cancelEmailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="Отмена"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tellEditPopup"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_acc"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="Изменение Телефон"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/tellEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:hint="Введите новый телефон"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:inputType="phone"
+                android:digits="0123456789"
+                android:layout_marginBottom="16dp" />
+
+
+            <Button
+                android:id="@+id/saveTellButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Сохранить"
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/cancelTellButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#2E7D32"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="Отмена"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

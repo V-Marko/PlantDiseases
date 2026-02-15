@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PlantDiseases</string>
+
+    <!-- Drawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Settings -->
+
+    <!-- Languages -->
+    <string-array name="languages">
+        <item>English</item>
+        <item>Русский</item>
+        <item>Հայերեն</item>
+    </string-array>
+    <string name="email_not_specified">Email-ը նշված չէ</string>
+    <string name="phone_not_specified">Հեռախոսահամարը նշված չէ</string>
+</resources>

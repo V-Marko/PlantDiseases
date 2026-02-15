@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F8FDF8"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вход в систему"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#2E7D32"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plant Diseases App"
+        android:textSize="16sp"
+        android:textColor="#81C784"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="48dp" />
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="mrdo13"
+        android:hint="Имя пользователя"
+        android:inputType="text"
+        android:padding="16dp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="16dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textColorHint="@color/lightGreen" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Пароль"
+        android:text="123a321"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="32dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textColorHint="@color/lightGreen" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Войти"
+        android:backgroundTint="#388E3C"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>
