@@ -1,0 +1,6 @@
+[submodule "backend/PlantDiseases"]
+	path = backend/PlantDiseases
+	url = https://github.com/V-Marko/PlantDiseases.git
+[submodule "PlantDiseases"]
+	path = PlantDiseases
+	url = https://github.com/V-Marko/PlantDiseases.git
